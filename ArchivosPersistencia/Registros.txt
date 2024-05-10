@@ -1,0 +1,4 @@
+=== Registro Trabajadores ===
+Admin: a
+=== Registro Usuarios ===
+p: w
