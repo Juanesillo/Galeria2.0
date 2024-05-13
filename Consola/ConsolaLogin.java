@@ -13,6 +13,7 @@ import java.util.Scanner;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
+import InventariosySubasta.Subasta;
 import LoginRegistro.Login;
 import Trabajadores.Cajero;
 import Galeria.Galeria;
@@ -232,6 +233,22 @@ public class ConsolaLogin {
             else if(input.equals(2)){
 
                 // Cobrar precio Subasta 
+                ArrayList<Subasta> subastas =  Galeria.getSubastas();
+                for(int i=0; i< Galeria.getSubastas().size();i++){  
+                    for( Entry<String, Integer> entry:  subastas.get(i).getOfertas().entrySet()){
+
+                        String nombre= entry.getKey(); // nombre del cliente
+                        Integer value = entry.getValue();
+                        Cajero.RegistrarCompra(nombre, value);
+                    }
+                    
+
+
+                }
+                
+            
+
+
 
 
             }

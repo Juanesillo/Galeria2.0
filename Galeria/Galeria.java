@@ -70,6 +70,11 @@ public class Galeria {
 
         listaSubasta.add(subasta);
     }
+
+    public static ArrayList<Subasta> getSubastas(){
+
+        return listaSubasta;
+    }
   
 
 
