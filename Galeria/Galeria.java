@@ -61,6 +61,9 @@ public class Galeria {
 
         SolicitudCompra.add(nombre);
     }
+
+    public static HashMap<String,Pieza> getsolicituPiez(){ return SolicitudPieza;}
+
   
 
 

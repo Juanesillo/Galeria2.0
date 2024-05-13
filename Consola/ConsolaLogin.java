@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
@@ -98,7 +99,7 @@ public class ConsolaLogin {
 
 
     // consola de administrador
-    public static void consolaAdmin(Scanner scanner){
+    public static void consolaAdmin(Scanner scanner) throws Exception{
         boolean consolaadmin= true;
         // Opciones para administrador
          // inicio ciclo consola
@@ -123,7 +124,13 @@ public class ConsolaLogin {
         if(input.equals(2)){
 
             //agregar piezas al inventario de solicitud pieza
-
+            for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
+                        String key = entry.getKey();
+                        Pieza value = entry.getValue();
+                        // Agregar la pieza al inventario
+                        Inventario.AgregarDatos(value);
+                        System.out.println(key +" Agregada con extio");
+                    }
 
         }
 
