@@ -160,7 +160,52 @@ public class ConsolaLogin {
 
 
 
-    public static void consolaCajero(Scanner scanner){}
+    public static void consolaCajero(Scanner scanner){
+
+        Boolean consolacajero= true;
+        while (consolacajero) {
+            // opciones de Cajero
+                // dos opciones Registrar pago
+            System.out.println("1. Registrar Pago");
+            System.out.println("2. Cobrar Subasta");
+            System.out.println("3. salir");
+            Integer input= Integer.parseInt(scanner.nextLine());    
+            if(input.equals(1)){
+                System.out.println("Nombre de la pieza");
+                String nombre= scanner.nextLine();
+                System.out.println("Valor de la pieza");
+                Integer valor= Integer.parseInt(scanner.nextLine());
+
+                if(Inventario.getListadoInventario().containsKey(nombre)){
+                    Cajero.RegistrarCompra(nombre, valor);
+                    System.err.println("Pieza vendida");
+
+                }
+                else{
+                    System.out.println("La pieza no se encuentra en el inventario Consultar Inventario");
+                    System.err.println(Inventario.getlistadoinventario());
+                }
+                
+            }
+            else if(input.equals(2)){
+
+            }
+            else if(input.equals(3)){
+                consolacajero= false;
+                break;
+            }
+            else{
+                System.out.println("Opción no valida");
+            }
+        }
+
+
+
+    }
+
+
+
+
     public static void consolaOperador(Scanner scanner){}
 
 

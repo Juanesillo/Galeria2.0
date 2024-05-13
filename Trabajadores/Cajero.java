@@ -20,8 +20,8 @@ public class Cajero extends Login {
         return registroCompras;
     }
 
-    public void RegistrarCompra(String cliente, Integer Costo){
-        registroCompras.put(cliente, Costo);
+    public static void RegistrarCompra(String nombrePieza, Integer Costo){
+        registroCompras.put(nombrePieza, Costo);
     }
 
     // validar que se puede realizar la compra
