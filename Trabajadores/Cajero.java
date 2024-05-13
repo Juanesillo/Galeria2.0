@@ -9,12 +9,16 @@ import LoginRegistro.Login;
 public class Cajero extends Login {
     
 
-    private HashMap<String, Integer>registroCompras = new HashMap<String, Integer>();
+    private static HashMap<String, Integer>registroCompras = new HashMap<String, Integer>();
 
     public Cajero(String user, Object password){
         super(user, password);
     }
 
+
+    public static HashMap<String, Integer> getRegistroCompras(){
+        return registroCompras;
+    }
 
     public void RegistrarCompra(String cliente, Integer Costo){
         registroCompras.put(cliente, Costo);

@@ -60,6 +60,15 @@ public class Inventario {
         
     }
 
+
+    public static void eliminarPieza(String nombre){
+
+        ListadoInventario.remove(nombre);
+        exhibidas.remove(nombre);
+        ListadoSubasta.remove(nombre);
+    }
+
+
     public static void AgregarHistorialArtista(String nombre){
         ArrayList<Pieza> piezas= new ArrayList<Pieza>();
         for(Pieza pieza: ListadoInventario.values()){

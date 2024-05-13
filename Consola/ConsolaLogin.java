@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
 import LoginRegistro.Login;
+import Trabajadores.Cajero;
 import Galeria.Galeria;
 public class ConsolaLogin {
       public static void main(String[] args) throws Exception {
@@ -136,7 +138,14 @@ public class ConsolaLogin {
 
         if(input.equals(3)){
             //eliminar las piezas que ya fueron registradas como compra por el Cajero
+            
+            for (Entry<String, Integer> entry : Cajero.getRegistroCompras().entrySet()){
+                String nombre= entry.getKey();
+                Inventario.eliminarPieza(nombre);
+                System.out.println(nombre +" Pieza removida");
 
+                
+            }
 
         }
         if(input.equals(4)){
