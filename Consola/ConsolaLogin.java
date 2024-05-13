@@ -151,24 +151,8 @@ public class ConsolaLogin {
         if(input.equals(4)){
             consolaadmin= false;
             break;
+        }   
         }
-        
-
-
-
-
-            
-        }
-
-
-
-       
-
-
-
-
-
-
 
     }
 
