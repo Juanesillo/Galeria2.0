@@ -1,1 +1,2 @@
-l,1.0,false,prubea,p
+Contacto/Dinero/Validacion/User/passwordprueba,12000.0,false,prueba,prueba
+

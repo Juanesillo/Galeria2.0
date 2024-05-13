@@ -112,21 +112,68 @@ public class ConsolaLogin {
         System.out.println("3.Consultar Historial pieza");
         System.out.println("4.Consultar Historial Artista");
         System.out.println("5.Salir");
-
-
-
         Integer input= Integer.parseInt(scanner.nextLine());
-
         // primeras validaciones consultar Historiales
         if(input.equals(1)){
             System.out.println("Estas son las piezas disponibles para comprar");
             System.out.println(Inventario.getListadoInventario());
+            System.out.println("Nombre de la pieza que desea comprar");
+            String Nombre= scanner.nextLine();
+            // registrar la solicitud de compra para que el cajero la reciba
+            Galeria.comprar(Nombre);
+        }
+        // Registrar una pieza => HashMap<String,Pieza>= Administrador recorre y agrega piezas por mapa
+        else if (input.equals(2)){
+            // registrar una puieza
+            // primero obtener datos para crear la pieza 
+
+            System.out.println("Digite el Titulo de la pieza");
+            String Titulo= scanner.nextLine();
+            System.out.println("Fecha de cración formato Year/DAY/Month");
+            String Fecha= scanner.nextLine();
+            System.out.println("Digite el lugar de creación");
+            String lugarCreacion= scanner.nextLine();
+            System.out.println("Digite el precio de la Pieza");
+            Integer Precio= Integer.parseInt(scanner.nextLine());
+            System.out.println("¿La pieza esta disponible para ser subastada?");
+            Boolean Disponible= Boolean.parseBoolean(scanner.nextLine());
+            System.out.println("¿En que estado se ecnuentra la piezas?");
+            String Estado = scanner.nextLine();
+            System.out.println("¿Quién es el autor de la pieza?");
+            String Autor= scanner.nextLine();
+            // crear la pieza 
+            Pieza pieza= new Pieza(Titulo, Fecha, lugarCreacion, Precio, Disponible, Estado, Autor);
+            // enviar la solicitud para que el administrador la agregue al inventario
+            Galeria.SolicitudPieza(Titulo, pieza);
+            // redirecciona al Cajero 
+
+        }
+        else if(input.equals(3)){
+            // Consultar historial de una pieza
+            System.out.println("Por favor Digite el nombre de la pieza a consultar");
+            String nombre= scanner.nextLine();
+            // buscar en el mapa de historial
+            if (Pieza.gethistorial().containsKey(nombre)) {
+                System.out.println(Pieza.gethistorial().get(nombre)); 
+            }
+            else{
+                System.out.println("Pieza no encontrada");
+            }
+           
+        }
+        else if(input.equals(4)){
+            // Consultar Historial Artista
+            System.out.println("Por favor Digite el nombre del artista a consultar");
+            String nombre= scanner.nextLine();
+            if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
+            else{
+                System.out.println("Artista no encontrado...");
+            }
+           
+            
 
 
         }
-        else if (input.equals(2)){}
-        else if(input.equals(3)){}
-        else if(input.equals(4)){}
             //obtener mapa de artista
         else if(input.equals(5)){consolacliente= false;}
         else{

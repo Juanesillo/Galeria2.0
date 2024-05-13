@@ -1,4 +1,4 @@
 === Registro Trabajadores ===
-Admin: a
+Operador: Operador
 === Registro Usuarios ===
 p: w

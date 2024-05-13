@@ -13,7 +13,8 @@ public class Galeria {
     // HistorialPieza
     private static HashMap<String,Object>ListadoTrabajadores=new HashMap<String,Object>();
     private static ArrayList<Cliente>ListaClientes = new ArrayList<Cliente>();
-  
+    private static HashMap<String,Pieza>SolicitudPieza= new HashMap<String,Pieza>();
+    private static ArrayList<String>SolicitudCompra= new ArrayList<String>();  
 
     public Galeria(){
         
@@ -48,6 +49,17 @@ public class Galeria {
 
     public static void agregarCliente(Cliente cliente){
         ListaClientes.add(cliente);
+    }
+
+
+    public static void SolicitudPieza(String nombre, Pieza pieza){
+        SolicitudPieza.put(nombre, pieza);
+    }
+
+
+    public static void comprar(String nombre){
+
+        SolicitudCompra.add(nombre);
     }
   
 
