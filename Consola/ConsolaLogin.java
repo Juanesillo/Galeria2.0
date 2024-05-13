@@ -110,7 +110,9 @@ public class ConsolaLogin {
         System.out.println("1. Validar usuarios");
         System.out.println("2. Agregar Piezas Inventario");
         System.out.println("3. Elminiar Inventario");
-        System.out.println("4. salir");
+        System.out.println("4.Consultar Historial pieza");
+        System.out.println("5.Consultar Historial Artista");
+        System.out.println("6. salir");
         Integer input= Integer.parseInt(scanner.nextLine());
         if(input.equals(1)){
             // validar a todos los usuarios de la Galeria 
@@ -123,7 +125,7 @@ public class ConsolaLogin {
 
 
         }
-        if(input.equals(2)){
+        else if(input.equals(2)){
 
             //agregar piezas al inventario de solicitud pieza
             for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
@@ -136,7 +138,7 @@ public class ConsolaLogin {
 
         }
 
-        if(input.equals(3)){
+       else if(input.equals(3)){
             //eliminar las piezas que ya fueron registradas como compra por el Cajero
             
             for (Entry<String, Integer> entry : Cajero.getRegistroCompras().entrySet()){
@@ -148,7 +150,45 @@ public class ConsolaLogin {
             }
 
         }
-        if(input.equals(4)){
+
+
+
+        else if(input.equals(4)){
+
+
+            // Consultar historial de una pieza
+            System.out.println("Por favor Digite el nombre de la pieza a consultar");
+            String nombre= scanner.nextLine();
+            // buscar en el mapa de historial
+            if (Pieza.gethistorial().containsKey(nombre)) {
+                System.out.println(Pieza.gethistorial().get(nombre)); 
+            }
+            else{
+                System.out.println("Pieza no encontrada");
+            }
+
+        }
+
+        else if(input.equals(5)){
+
+              // Consultar Historial Artista
+              System.out.println("Por favor Digite el nombre del artista a consultar");
+              String nombre= scanner.nextLine();
+              if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
+              else{
+                  System.out.println("Artista no encontrado...");
+              }
+
+        }
+
+
+
+
+
+
+
+
+        else if(input.equals(6)){
             consolaadmin= false;
             break;
         }   
@@ -168,7 +208,9 @@ public class ConsolaLogin {
                 // dos opciones Registrar pago
             System.out.println("1. Registrar Pago");
             System.out.println("2. Cobrar Subasta");
-            System.out.println("3. salir");
+            System.out.println("3.Consultar Historial pieza");
+            System.out.println("4.Consultar Historial Artista");
+            System.out.println("5. salir");
             Integer input= Integer.parseInt(scanner.nextLine());    
             if(input.equals(1)){
                 System.out.println("Nombre de la pieza");
@@ -189,8 +231,38 @@ public class ConsolaLogin {
             }
             else if(input.equals(2)){
 
+                // Cobrar precio Subasta 
+
+
             }
+
             else if(input.equals(3)){
+                // Consultar historial de una pieza
+                System.out.println("Por favor Digite el nombre de la pieza a consultar");
+                String nombre= scanner.nextLine();
+                // buscar en el mapa de historial
+                if (Pieza.gethistorial().containsKey(nombre)) {
+                    System.out.println(Pieza.gethistorial().get(nombre)); 
+                }
+                else{
+                    System.out.println("Pieza no encontrada");
+                }
+               
+            }
+            else if(input.equals(4)){
+                // Consultar Historial Artista
+                System.out.println("Por favor Digite el nombre del artista a consultar");
+                String nombre= scanner.nextLine();
+                if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
+                else{
+                    System.out.println("Artista no encontrado...");
+                }
+               
+                
+            }
+
+
+            else if(input.equals(5)){
                 consolacajero= false;
                 break;
             }
