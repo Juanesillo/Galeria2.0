@@ -1,4 +1,4 @@
-package ConsolaPruebas;
+package Consola;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -47,17 +47,28 @@ public class ConsolaLogin {
 
             if(User.containsKey(user) && User.get(user).equals(password)){
                 System.out.println("Bienvenido Usuario" + user+"\n");
-                consolarUser(scanner);
                 // desplegar opciones del cliente
-
-
+                consolarUser(scanner);
                 
-
-
 
             }
             else if(trabajadores.containsKey(user) && trabajadores.get(user).equals(password)){
                 System.out.println("Bienvenido"+user);
+                if (user.equals("Admin")){
+                    System.out.println("Consola Adminstrador");
+                    consolaAdmin(scanner);
+
+
+                }
+                else if (user.equals("Cajero")){
+                    System.out.println("Consola Cajero");
+                    consolaCajero(scanner);
+                }
+                else if (user.equals("Operador")){
+                    System.out.println("Consola Operador");
+                    consolaOperador(scanner);
+                }
+
 
 
 
@@ -80,6 +91,13 @@ public class ConsolaLogin {
     }
 
    // Registrar una Pieza
+
+
+
+    public static void consolaAdmin(Scanner scanner){}
+    public static void consolaCajero(Scanner scanner){}
+    public static void consolaOperador(Scanner scanner){}
+
 
 
 

@@ -1,4 +1,4 @@
-package ConsolaPruebas;
+package Consola;
 
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
