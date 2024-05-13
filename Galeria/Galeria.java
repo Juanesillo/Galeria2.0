@@ -1,7 +1,7 @@
 package Galeria;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import InventariosySubasta.Subasta;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
@@ -15,6 +15,7 @@ public class Galeria {
     private static ArrayList<Cliente>ListaClientes = new ArrayList<Cliente>();
     private static HashMap<String,Pieza>SolicitudPieza= new HashMap<String,Pieza>();
     private static ArrayList<String>SolicitudCompra= new ArrayList<String>();  
+    private static ArrayList<Subasta>listaSubasta= new ArrayList<Subasta>();
 
     public Galeria(){
         
@@ -64,6 +65,11 @@ public class Galeria {
 
     public static HashMap<String,Pieza> getsolicituPiez(){ return SolicitudPieza;}
 
+    // subastas existentes 
+    public static void AgregarSubasta(Subasta subasta){
+
+        listaSubasta.add(subasta);
+    }
   
 
 

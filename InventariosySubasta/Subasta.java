@@ -11,6 +11,8 @@ public class Subasta {
 
     private static HashMap<String,Integer> Ofertas= new HashMap<String,Integer>();
 
+    private Pieza pieza=null;
+
     private boolean Iniciar;
 
 
@@ -19,7 +21,22 @@ public class Subasta {
     }
 
 
-// Iniciar la subasta 
+
+    
+
+
+public void setPieza(Pieza pieza) {
+        this.pieza = pieza;
+    }
+
+public Pieza getPieza(){
+    return pieza;
+}
+
+
+
+
+    // Iniciar la subasta 
     public HashMap<Pieza,Integer> iniciarSubasta(){
 
     Calendar calendario = Calendar.getInstance();
@@ -39,6 +56,7 @@ public class Subasta {
         String nombre = keylist.get(0);
 
         pieza = listadoSubasta.get(nombre);
+        setPieza(pieza);
         precio= pieza.getPrecio();
         retorno.put(pieza, precio);
     }
