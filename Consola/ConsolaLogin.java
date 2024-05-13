@@ -20,6 +20,10 @@ public class ConsolaLogin {
         System.out.println("\u001B[36mBienvenido a la Galería\u001B[0m");
         Scanner scanner= new Scanner(System.in);
         boolean running= true;
+
+
+
+        System.out.println(Galeria.getTrabajadores());
         
         while (running) {
             System.out.println("\n¿Qué desea hacer?");
@@ -34,8 +38,8 @@ public class ConsolaLogin {
             
         }
             // Opción Iniciar Sesion y ejecutar código si es User o trabajador
-            else if(input==2){CargarInformacionLogin();
-            
+            else if(input==2){
+            CargarInformacionLogin();
             // Iniciar Validacion por Usuario
 
             System.out.println("\n Por favor digite su Usuario");
@@ -93,15 +97,76 @@ public class ConsolaLogin {
    // Registrar una Pieza
 
 
+    // consola de administrador
+    public static void consolaAdmin(Scanner scanner){
+        boolean consolaadmin= true;
+        // Opciones para administrador
+         // inicio ciclo consola
+        while (consolaadmin) {
+            
+        System.out.println("1. Validar usuarios");
+        System.out.println("2. Agregar Piezas Inventario");
+        System.out.println("3. Elminiar Inventario");
+        System.out.println("4. salir");
+        Integer input= Integer.parseInt(scanner.nextLine());
+        if(input.equals(1)){
+            // validar a todos los usuarios de la Galeria 
+            for (Cliente cliente :Galeria.getlistaClientes()){
+                cliente.setValidacion(true);
+                System.out.println(cliente.getuser() + cliente.getValidacion());
+            }
+           
 
-    public static void consolaAdmin(Scanner scanner){}
+
+
+        }
+        if(input.equals(2)){
+
+            //agregar piezas al inventario de solicitud pieza
+
+
+        }
+
+        if(input.equals(3)){
+            //eliminar las piezas que ya fueron registradas como compra por el Cajero
+
+
+        }
+        if(input.equals(4)){
+            consolaadmin= false;
+            break;
+        }
+        
+
+
+
+
+            
+        }
+
+
+
+       
+
+
+
+
+
+
+
+    }
+
+
+
+
+
     public static void consolaCajero(Scanner scanner){}
     public static void consolaOperador(Scanner scanner){}
 
 
 
 
-    //consola User
+    //consola Usuario 
 
     public static void consolarUser(Scanner scanner){
         boolean consolacliente=true;
@@ -262,7 +327,7 @@ public class ConsolaLogin {
 
     public static void CargarInformacionLogin() throws FileNotFoundException, IOException{
         String nombreArchivo = "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Trabajadores=Galeria.getTrabajadores();
+        HashMap<String,Object> Trabajadores= new HashMap<String, Object>();
         HashMap<String,Object> Usuarios=Login.getlistadoUser();
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea; 
@@ -276,6 +341,7 @@ public class ConsolaLogin {
                     String clave = partes[0].trim();
                     String password = partes[1].trim();
                     Usuarios.put(clave, password);
+                    
                 }
                
                                             

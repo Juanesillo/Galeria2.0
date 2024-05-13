@@ -1,2 +1,2 @@
-Contacto/Dinero/Validacion/User/passwordprueba,12000.0,false,prueba,prueba
+Contacto/Dinero/Validacion/User/password12,12.0,false,juanes,j
 
