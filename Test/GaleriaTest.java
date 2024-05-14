@@ -49,4 +49,5 @@ public class GaleriaTest {
         assertTrue(Galeria.getsolicituPiez().containsKey("SolicitudYuca"));
         assertEquals(pieza, Galeria.getsolicituPiez().get("SolicitudYuca"));
     }
+    // funciona :)
 }
