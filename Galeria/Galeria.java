@@ -26,7 +26,6 @@ public class Galeria {
     }    // Por consola se crearián piezas
 
 
-
     public static ArrayList<Cliente> getlistaClientes(){
         return ListaClientes;
     }
@@ -59,7 +58,6 @@ public class Galeria {
 
 
     public static void comprar(String nombre){
-
         SolicitudCompra.add(nombre);
     }
 
