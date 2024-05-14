@@ -77,7 +77,12 @@ public class Cliente extends Login {
 
     public  HashMap<String,Pieza> getHistorial(){
         return HistorialPieza;
-    } 
+    }
+
+
+	public HashMap<String, Pieza> getCompras() {
+		return Compras;
+	} 
 
 
     
