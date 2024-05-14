@@ -40,12 +40,12 @@ public class OperadorTest {
     public void testRegistrarSubasta() {
     	
         // Registrar una subasta con nombre y precio
-        operador.registrarSubasta("La Guernica", 1587569);
+        operador.registrarSubasta("La Guernica", 1100);
 
         // Verificar que la subasta se haya registrado correctamente
         
         assertTrue(subasta.getOfertas().containsKey("La Guernica"));
-        assertEquals(1587569, subasta.getOfertas().get("La Guernica").intValue());
+        assertEquals(1100, subasta.getOfertas().get("La Guernica").intValue());
     }
 }
 
