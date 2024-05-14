@@ -1,14 +1,17 @@
 package Test;
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
 import Trabajadores.Administrador;
 
 public class AdministradorTest {
+	
     // beforeEach antes para hacer prubeas
-    @Test
+	@Test
     public void testRegistrarPieza() throws Exception {
      
         Pieza pieza= new Pieza("prueba","2024-05-06" , "Bogotá", 13000, false,"Bueno", "Davinci");
