@@ -70,6 +70,11 @@ public class Galeria {
 
         listaSubasta.add(subasta);
     }
+
+	public static HashMap<String, Object> getListadoTrabajadores() {
+		
+		return ListadoTrabajadores;
+	}
   
 
 
