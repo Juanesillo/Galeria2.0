@@ -12,20 +12,20 @@ import LoginRegistro.Login;
 public class Operador extends Login{
 
 
-    private HashMap<String,Pieza> Ganadores= new HashMap<String,Pieza>();
+    private static  HashMap<String,Pieza> Ganadores= new HashMap<String,Pieza>();
 
     public Operador(String user, Object password){
         super(user, password);
     }
 
-    public  HashMap<String,Pieza> ObtenerGanador(){
+    public  static HashMap<String,Pieza> ObtenerGanador(){
         return Ganadores;
     }
 
     public void registrarSubasta(String nombre, Integer precio){
         Subasta.Registro(nombre, precio);
     }
-    public static void registroGanador(){
+    public static void registroGanador(Subasta subasta){
 
         Integer maxValor=0;
         String claveMaxValor = null;
@@ -40,7 +40,8 @@ public class Operador extends Login{
                     claveMaxValor=clave;}  
 
                     }
-    Subasta.Registro(claveMaxValor, maxValor);
+        Cajero.RegistrarCompra(claveMaxValor, maxValor);
+        Ganadores.put(claveMaxValor, subasta.getPieza());
 
 
 

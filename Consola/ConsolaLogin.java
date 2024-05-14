@@ -16,6 +16,7 @@ import InventariosySubasta.Pieza;
 import InventariosySubasta.Subasta;
 import LoginRegistro.Login;
 import Trabajadores.Cajero;
+import Trabajadores.Operador;
 import Galeria.Galeria;
 public class ConsolaLogin {
       public static void main(String[] args) throws Exception {
@@ -320,6 +321,9 @@ public class ConsolaLogin {
 
                 System.out.println("Valor de la pieza a subastar " + piezaSubasta.get(subasta.getPieza()));
 
+
+                Galeria.AgregarSubasta(subasta);
+
             }
             else if(input.equals(2)){
 
@@ -336,13 +340,42 @@ public class ConsolaLogin {
             else if(input.equals(3)){
 
                 //obtener ganador
+                for (Subasta subasta: Galeria.getSubastas()){
+
+                    Operador.registroGanador(subasta);
+                }
+                System.err.println("Ganadores"+ Operador.ObtenerGanador());
+
 
                 
             }
 
 
-            else if(input.equals(4)){}
-            else if(input.equals(5)){}
+            else if(input.equals(4)){
+
+                // Consultar historial de una pieza
+                System.out.println("Por favor Digite el nombre de la pieza a consultar");
+                String nombre= scanner.nextLine();
+                // buscar en el mapa de historial
+                if (Pieza.gethistorial().containsKey(nombre)) {
+                    System.out.println(Pieza.gethistorial().get(nombre)); 
+                }
+                else{
+                    System.out.println("Pieza no encontrada");
+                }
+            }
+            else if(input.equals(5)){
+
+                // Consultar Historial Artista
+                System.out.println("Por favor Digite el nombre del artista a consultar");
+                String nombre= scanner.nextLine();
+                if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
+                else{
+                    System.out.println("Artista no encontrado...");
+                }
+
+
+            }
             else if(input.equals(6)){
                 consolaoperador=false;
                 break;
