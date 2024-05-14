@@ -301,9 +301,27 @@ public class ConsolaLogin {
         while (consolaoperador) {
 
 
-            System.out.println();
-            System.out.println();
-            System.out.println();
+            System.out.println("1. Iniciar Subasta");
+            System.out.println("2. Finalizar Subasta");
+            System.out.println("3. Registrar ganador");
+            System.out.println("4. Registrar Subasta");
+            System.out.println("5. Historial Pieza");
+            System.out.println("6. Historial Artista");
+
+            Integer input= Integer.parseInt(scanner.nextLine());
+
+            if(input.equals(1)){}
+            else if(input.equals(2)){}
+            else if(input.equals(3)){}
+            else if(input.equals(4)){}
+            else if(input.equals(5)){}
+            else if(input.equals(6)){}
+
+            else{
+                System.out.println("Opcion no valida");
+            }
+            
+ 
 
 
             
