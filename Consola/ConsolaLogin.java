@@ -235,7 +235,8 @@ public class ConsolaLogin {
                 // Cobrar precio Subasta 
                 ArrayList<Subasta> subastas =  Galeria.getSubastas();
                 for(int i=0; i< Galeria.getSubastas().size();i++){  
-                    for( Entry<String, Integer> entry:  subastas.get(i).getOfertas().entrySet()){
+                    subastas.get(i);
+                    for( Entry<String, Integer> entry:  Subasta.getOfertas().entrySet()){
 
                         String nombre= entry.getKey(); // nombre del cliente
                         Integer value = entry.getValue();
@@ -304,18 +305,49 @@ public class ConsolaLogin {
             System.out.println("1. Iniciar Subasta");
             System.out.println("2. Finalizar Subasta");
             System.out.println("3. Registrar ganador");
-            System.out.println("4. Registrar Subasta");
-            System.out.println("5. Historial Pieza");
-            System.out.println("6. Historial Artista");
+            System.out.println("4. Historial Pieza");
+            System.out.println("5. Historial Artista");
+            System.out.println("6. Salir");
 
             Integer input= Integer.parseInt(scanner.nextLine());
 
-            if(input.equals(1)){}
-            else if(input.equals(2)){}
-            else if(input.equals(3)){}
+            if(input.equals(1)){
+                //iniciar subasta
+
+                Subasta subasta= new Subasta();
+                HashMap<Pieza,Integer> piezaSubasta=subasta.iniciarSubasta();// hashmap con pieza a subastar
+                System.out.println("Pieza a subastar" + subasta.getPieza());
+
+                System.out.println("Valor de la pieza a subastar " + piezaSubasta.get(subasta.getPieza()));
+
+            }
+            else if(input.equals(2)){
+
+                // registrar Oferta
+
+                System.out.println("Cliente que esta pujando");
+                String cliente= scanner.nextLine();
+                System.out.println("Valor por el cual puja");
+                Integer valor= Integer.parseInt(scanner.nextLine());
+                Subasta.Registro(cliente, valor);
+                System.out.println("Se registro para el cliente"+ cliente +"un valor de " + valor);
+
+            }
+            else if(input.equals(3)){
+
+                //obtener ganador
+
+                
+            }
+
+
             else if(input.equals(4)){}
             else if(input.equals(5)){}
-            else if(input.equals(6)){}
+            else if(input.equals(6)){
+                consolaoperador=false;
+                break;
+
+            }
 
             else{
                 System.out.println("Opcion no valida");

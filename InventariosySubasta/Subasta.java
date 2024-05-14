@@ -11,7 +11,7 @@ public class Subasta {
 
     private static HashMap<String,Integer> Ofertas= new HashMap<String,Integer>();
 
-    private Pieza pieza=null;
+    private Pieza pieza;
 
     private boolean Iniciar;
 
@@ -71,7 +71,7 @@ public Pieza getPieza(){
 
 
 
-    public HashMap<String, Integer> getOfertas() {
+    public static HashMap<String, Integer> getOfertas() {
         return Ofertas;
     }
 
