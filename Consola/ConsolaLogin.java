@@ -244,13 +244,7 @@ public class ConsolaLogin {
                     
 
 
-                }
-                
-            
-
-
-
-
+                }         
             }
 
             else if(input.equals(3)){
@@ -295,7 +289,40 @@ public class ConsolaLogin {
 
 
 
-    public static void consolaOperador(Scanner scanner){}
+    // Consola Operador
+
+
+
+    public static void consolaOperador(Scanner scanner){
+
+        Boolean consolaoperador= true;
+
+
+        while (consolaoperador) {
+
+
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
+
+            
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 
