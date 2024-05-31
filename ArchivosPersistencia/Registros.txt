@@ -1,4 +1,5 @@
 === Registro Trabajadores ===
-Operador: Operador
+Admin: 123
 === Registro Usuarios ===
-p: w
+Juan: 123
+Carlos: 123

@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -16,33 +17,62 @@ import InventariosySubasta.Pieza;
 import LoginRegistro.Login;
 import Trabajadores.Cajero;
 import Galeria.Galeria;
+
 public class ConsolaLogin {
-      public static void main(String[] args) throws Exception {
-        CargarInformacionLogin();
-        
+	private static List<HashMap<String,Object>> datosPersistencia = new ArrayList< HashMap<String,Object>>();
+	
+      public static List<HashMap<String, Object>> getDatosPersistencia() {
+		return datosPersistencia;
+	}
+
+	public static void setDatosPersistencia(List<HashMap<String, Object>> datosPersistencia) {
+		ConsolaLogin.datosPersistencia = datosPersistencia;
+	}
+
+public static void main(String[] args) throws Exception {
+       // CargarInformacionLogin();
+    	 
+		
+     
         System.out.println("\u001B[36mBienvenido a la Galería\u001B[0m");
         Scanner scanner= new Scanner(System.in);
         boolean running= true;
 
 
-
-        System.out.println(Galeria.getTrabajadores());
+        //System.out.println(Galeria.getTrabajadores());
         
         while (running) {
             System.out.println("\n¿Qué desea hacer?");
             System.out.println("1. Registrarse en la Galería");
             System.out.println("2. Iniciar sesión en la Galería");
             System.out.println("3. Salir");
-            // opción Registrar Usuarios y Trabajadores
+            
+            boolean isNotEmpty = datosPersistencia != null && !datosPersistencia.isEmpty(); // Verificar si ya se han guardado valores de lo contrario los crea en el else
+            if (isNotEmpty) {
+        		HashMap<String,Object> Trabajadores= datosPersistencia.get(0);
+        		HashMap<String,Object> Usuarios= datosPersistencia.get(1);
+        		Galeria.setListadoTrabajadores(Trabajadores);
+        		Login.setListadoUsuario(Usuarios);
+        		
+        		PersistenciaTrabajadoresClientes(); }
+            
             Integer input= Integer.parseInt(scanner.nextLine());
-            if(input==1){ System.out.println("\n\u001B[33mRegistro\u001B[0m");    
-            RegistroGaleria(scanner); PersistenciaTrabajadoresClientes();guardarClientes();
+            
+            if(input==1){ 
+            	
+            System.out.println("\n\u001B[33mRegistro\u001B[0m");  
+            
+            RegistroGaleria(scanner); // Agrega a la estructura de datos de la galeria
+            PersistenciaTrabajadoresClientes(); //Guarda en persitencia
+            guardarClientes(); // Agrega a la estructura de datos de los clientes clientes
             // almacenar usuarios y claves
             
         }
             // Opción Iniciar Sesion y ejecutar código si es User o trabajador
             else if(input==2){
-            CargarInformacionLogin();
+            	
+            //CargarInformacionLogin();
+            	
             // Iniciar Validacion por Usuario
 
             System.out.println("\n Por favor digite su Usuario");
@@ -84,18 +114,21 @@ public class ConsolaLogin {
                 //Consola Cajero
             }
             else{
-                System.out.println("Usuario no registrado");
+                System.out.println("Usuario no registrado");}
             }
-            }
-            else{System.out.println("Esperamos que vuelva pronto"); running=false;}
-            PersistenciaTrabajadoresClientes();
+            else{
+            	System.out.println("Esperamos que vuelva pronto"); 
+            	running=false;
+            	GuardarInformacionLogin();
+            	
+            	}
 
 
         }
         scanner.close();
+     }
 
-
-    }
+ 
 
    // Registrar una Pieza
 
@@ -400,7 +433,7 @@ public class ConsolaLogin {
 
             Cliente cliente= new Cliente(contacto, false, user, password, Dinero);
             Galeria.agregarCliente(cliente);
-            System.out.println(Galeria.getlistaClientes());
+            //System.out.println(Galeria.getlistaClientes());
 
         }
         else if(input== 2){
@@ -422,9 +455,12 @@ public class ConsolaLogin {
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
         HashMap<String,Object> Trabajadores=Galeria.getTrabajadores();
         HashMap<String,Object> Usuarios=Login.getlistadoUser();
+        
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             writer.write("=== Registro Trabajadores ===\n");
+            
             for (java.util.Map.Entry<String, Object> entry: Trabajadores.entrySet()){
+     
                 String user= entry.getKey();
                 String password = (String) entry.getValue();
                 writer.write(user + ": ");
@@ -433,7 +469,10 @@ public class ConsolaLogin {
             }
             writer.write("=== Registro Usuarios ===\n");
             for (java.util.Map.Entry<String, Object> entry: Usuarios.entrySet()){
-                String user= entry.getKey();
+            	
+            	System.out.println(entry);
+            	
+            	String user= entry.getKey();
                 String password = (String) entry.getValue();
                 writer.write(user + ": ");
                 writer.write(password);
@@ -442,55 +481,7 @@ public class ConsolaLogin {
         }
     }
 
-    public static void CargarInformacionLogin() throws FileNotFoundException, IOException{
-        String nombreArchivo = "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Trabajadores= new HashMap<String, Object>();
-        HashMap<String,Object> Usuarios=Login.getlistadoUser();
-        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
-            String linea; 
-            while ((linea = reader.readLine()) != null) {
-               switch (linea) {
-                case "=== Registro Usuarios ===":
-                linea= reader.readLine();
-                if(linea != null){
-
-                    String [] partes=linea.split(":",2);
-                    String clave = partes[0].trim();
-                    String password = partes[1].trim();
-                    Usuarios.put(clave, password);
-                    
-                }
-               
-                                            
-                Login.setListadoUsuario(Usuarios);
-                System.out.println(Usuarios); //TODO borrar para entrega Final
-                
-                break;
-                case "=== Registro Trabajadores ===":
-                
-                    linea= reader.readLine();
-
-                    if (linea != null){
-                        String [] partes1=linea.split(":",2);
-                        String clave1 = partes1[0].trim();
-                        String password1 = partes1[1].trim();
-                        Trabajadores.put(clave1, password1);
-
-                    }
-                    
-                
-             
-                Galeria.setListadoTrabajadores(Trabajadores);
-                System.out.println(Trabajadores); //TODO borrar para entrega Final
-                
-                break;
-                
-
-                    // cargar los clientes
-               }
-            }
-        }
-    }
+    
     //persistencia Clientes
     public static void guardarClientes() {
         String archivo= "ArchivosPersistencia/ListaClientes.txt";
@@ -530,6 +521,67 @@ public class ConsolaLogin {
 
     }
 }
+    
+
+    public static void GuardarInformacionLogin() throws FileNotFoundException, IOException{
+    	
+        String nombreArchivo = "ArchivosPersistencia/Registros.txt";
+        HashMap<String,Object> Trabajadores= new HashMap<String, Object>();
+        HashMap<String,Object> Usuarios=new HashMap<String, Object>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea; 
+            while ((linea = reader.readLine()) != null) {
+               switch (linea) {
+               
+                case "=== Registro Usuarios ===":
+                
+                linea= reader.readLine();
+                if(linea != null){
+
+                    String [] partes=linea.split(":",2);
+                    String clave = partes[0].trim();
+                    String password = partes[1].trim();
+                    Usuarios.put(clave, password);
+                    
+                }
+               
+                                            
+                //Login.setListadoUsuario(Usuarios);
+                
+                
+                break;
+                case "=== Registro Trabajadores ===":
+                
+                    linea= reader.readLine();
+
+                    if (linea != null){
+                        String [] partes1=linea.split(":",2);
+                        String clave1 = partes1[0].trim();
+                        String password1 = partes1[1].trim();
+                        Trabajadores.put(clave1, password1);
+
+                    }
+                    
+                    List<HashMap<String,Object>> datosPersistencia = new ArrayList< HashMap<String,Object>>();
+                    datosPersistencia.add(Trabajadores);
+                    datosPersistencia.add(Usuarios);
+                    		
+                //Galeria.setListadoTrabajadores(Trabajadores);
+                
+                setDatosPersistencia(datosPersistencia);
+                
+                
+                break; 
+
+                    // cargar los clientes
+               }
+            }
+        }
+		
+    }
+
+   
+
 }
 
 
