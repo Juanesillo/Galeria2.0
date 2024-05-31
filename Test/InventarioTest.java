@@ -52,7 +52,7 @@ public class InventarioTest {
 
         Inventario.AgregarHistorialArtista("Davinci");
 
-        assertTrue(Inventario.getHistorialArtista().containsKey("Davinci"));
-        assertEquals(2, Inventario.getHistorialArtista().get("Davinci").size());
+        assertTrue(Inventario.getHistorialArtistas().containsKey("Davinci"));
+        assertEquals(2, Inventario.getArtista("Davinci").size());
     }
 }

@@ -64,7 +64,7 @@ public static void main(String[] args) throws Exception {
             
             RegistroGaleria(scanner); // Agrega a la estructura de datos de la galeria
             PersistenciaTrabajadoresClientes(); //Guarda en persitencia
-            guardarClientes(); // Agrega a la estructura de datos de los clientes clientes
+            guardarClientes(); // Agrega a el txt de datos de los clientes
             // almacenar usuarios y claves
             
         }
@@ -187,31 +187,12 @@ public static void main(String[] args) throws Exception {
 
 
         else if(input.equals(4)){
-
-
             // Consultar historial de una pieza
-            System.out.println("Por favor Digite el nombre de la pieza a consultar");
-            String nombre= scanner.nextLine();
-            // buscar en el mapa de historial
-            if (Pieza.gethistorial().containsKey(nombre)) {
-                System.out.println(Pieza.gethistorial().get(nombre)); 
-            }
-            else{
-                System.out.println("Pieza no encontrada");
-            }
-
-        }
+        	consultarHistPieza(scanner); }
 
         else if(input.equals(5)){
-
-              // Consultar Historial Artista
-              System.out.println("Por favor Digite el nombre del artista a consultar");
-              String nombre= scanner.nextLine();
-              if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
-              else{
-                  System.out.println("Artista no encontrado...");
-              }
-
+        	// Consultar Historial Artista
+            consultarArtista(scanner);
         }
 
 
@@ -230,9 +211,7 @@ public static void main(String[] args) throws Exception {
     }
 
 
-
-
-
+    //consola Cajero
     public static void consolaCajero(Scanner scanner){
 
         Boolean consolacajero= true;
@@ -270,28 +249,13 @@ public static void main(String[] args) throws Exception {
             }
 
             else if(input.equals(3)){
-                // Consultar historial de una pieza
-                System.out.println("Por favor Digite el nombre de la pieza a consultar");
-                String nombre= scanner.nextLine();
-                // buscar en el mapa de historial
-                if (Pieza.gethistorial().containsKey(nombre)) {
-                    System.out.println(Pieza.gethistorial().get(nombre)); 
-                }
-                else{
-                    System.out.println("Pieza no encontrada");
-                }
+            	// Consultar historial de una pieza
+            	consultarHistPieza(scanner);
                
             }
             else if(input.equals(4)){
-                // Consultar Historial Artista
-                System.out.println("Por favor Digite el nombre del artista a consultar");
-                String nombre= scanner.nextLine();
-                if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
-                else{
-                    System.out.println("Artista no encontrado...");
-                }
-               
-                
+            	// Consultar Historial Artista
+                consultarArtista(scanner);
             }
 
 
@@ -310,7 +274,7 @@ public static void main(String[] args) throws Exception {
 
 
 
-
+ // consola Operador
     public static void consolaOperador(Scanner scanner){}
 
 
@@ -363,31 +327,15 @@ public static void main(String[] args) throws Exception {
             // redirecciona al Cajero 
 
         }
+        
         else if(input.equals(3)){
-            // Consultar historial de una pieza
-            System.out.println("Por favor Digite el nombre de la pieza a consultar");
-            String nombre= scanner.nextLine();
-            // buscar en el mapa de historial
-            if (Pieza.gethistorial().containsKey(nombre)) {
-                System.out.println(Pieza.gethistorial().get(nombre)); 
-            }
-            else{
-                System.out.println("Pieza no encontrada");
-            }
+        	// Consultar historial de una pieza
+        	consultarHistPieza(scanner);
            
         }
         else if(input.equals(4)){
-            // Consultar Historial Artista
-            System.out.println("Por favor Digite el nombre del artista a consultar");
-            String nombre= scanner.nextLine();
-            if (Inventario.getHistorialArtista().containsKey(nombre)){ System.out.println(Inventario.getHistorialArtista().get(nombre));}
-            else{
-                System.out.println("Artista no encontrado...");
-            }
-           
-            
-
-
+        	// Consultar Historial Artista
+            consultarArtista(scanner);
         }
             //obtener mapa de artista
         else if(input.equals(5)){consolacliente= false;}
@@ -398,18 +346,9 @@ public static void main(String[] args) throws Exception {
             
         }
 
-        
-        
-
-
-
     }
 
-    // consola Admin
-
-    //consola Cajero
-
-    // consola Operador
+    
 
     public static void RegistroGaleria(Scanner scanner){
         System.out.println("\n¿Qué tipo de usuario es usted?");
@@ -546,7 +485,7 @@ public static void main(String[] args) throws Exception {
                 }
                
                                             
-                //Login.setListadoUsuario(Usuarios);
+                Login.setListadoUsuario(Usuarios);
                 
                 
                 break;
@@ -566,7 +505,7 @@ public static void main(String[] args) throws Exception {
                     datosPersistencia.add(Trabajadores);
                     datosPersistencia.add(Usuarios);
                     		
-                //Galeria.setListadoTrabajadores(Trabajadores);
+                Galeria.setListadoTrabajadores(Trabajadores);
                 
                 setDatosPersistencia(datosPersistencia);
                 
@@ -579,8 +518,34 @@ public static void main(String[] args) throws Exception {
         }
 		
     }
+    
+    public static void consultarArtista(Scanner scanner) {
+    	
+    	System.out.println("Por favor Digite el nombre del artista a consultar");
+        String nombre= scanner.nextLine();
+        
+        if (Galeria.getHistorialArtists().containsKey(nombre)){ 
+        	System.out.println(Galeria.getHistorialArtista(nombre));}
+        else{
+            System.out.println("Artista no encontrado...");
+        }
+		
+	}
 
-   
+  public static void consultarHistPieza(Scanner scanner) {
+    	
+    	System.out.println("Por favor Digite el nombre de la pieza a consultar: ");
+        String nombre= scanner.nextLine();
+        
+        if (Galeria.getHistorialPiezas().containsKey(nombre)){ 
+        	System.out.println(Galeria.getHistorialPieza(nombre));}
+        else{
+            System.out.println("Pieza no encontrada...");
+        }
+		
+	
+ 
+}
 
 }
 

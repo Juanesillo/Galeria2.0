@@ -1,6 +1,7 @@
 package InventariosySubasta;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Pieza {
@@ -80,16 +81,25 @@ public class Pieza {
     public String getAutor() {
         return autor;
     }
-
+    
+    public static HashMap<String, Object> getHistorialPiezas(){
+    	return Historial;}
+    
 
     // metodos Pieza
 
 
 
-    public static void AgregarEspecificos(String key, Object value){Especificos.put(key, value);}
-    public static void AgregarHistorial(String key, Object value){Historial.put(key, value);}
-    public static HashMap<String, Object> gethistorial(){return Historial;}
-
+    public static void AgregarEspecificos(String key, Object value){
+    	Especificos.put(key, value);}
+    
+    public static void AgregarHistorial(String key, Object value){
+    	Historial.put(key, value);}
+    
+  
+    public static Object getHistorialPieza(String nombre){
+        return getHistorialPiezas().get(nombre);
+    }
 
 
 

@@ -1,4 +1,5 @@
 === Registro Trabajadores ===
+Cajero: 123
 Admin: 123
 === Registro Usuarios ===
 Juan: 123

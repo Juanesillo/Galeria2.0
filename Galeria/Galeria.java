@@ -30,10 +30,6 @@ public class Galeria {
         return ListaClientes;
     }
 
-    public HashMap<String,ArrayList<Pieza>> consultarArtista(){
-
-        return Inventario.getHistorialArtista();
-    }
 
     public static  HashMap<String,Object> getTrabajadores(){
         return ListadoTrabajadores;
@@ -61,7 +57,27 @@ public class Galeria {
         SolicitudCompra.add(nombre);
     }
 
-    public static HashMap<String,Pieza> getsolicituPiez(){ return SolicitudPieza;}
+    public static HashMap<String,Pieza> getsolicituPiez(){ 
+    	return SolicitudPieza;}
+    
+	public static HashMap<String, ArrayList<Pieza>> getHistorialArtists() {
+		
+		return Inventario.getHistorialArtistas();
+	}
+
+	public static ArrayList<Pieza> getHistorialArtista(String nombre){
+        return Inventario.getArtista(nombre);
+    }
+	
+	public static HashMap<String, Object> getHistorialPiezas() {
+		
+		return Pieza.getHistorialPiezas();
+	}
+
+	public static Object getHistorialPieza(String nombre){
+        return Pieza.getHistorialPieza(nombre);
+    }
+	
 
     // subastas existentes 
     public static void AgregarSubasta(Subasta subasta){
@@ -77,8 +93,6 @@ public class Galeria {
 
 
 
-
-
-
+	
 
 }
