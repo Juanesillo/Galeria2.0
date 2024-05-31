@@ -89,7 +89,7 @@ public class Inventario {
     }
     
     public static ArrayList<Pieza> getArtista(String nombre){
-        return Inventario.getHistorialArtistas().get(nombre);
+        return getHistorialArtistas().get(nombre);
     }
 
     public static HashMap<String,Pieza> getListadoInventario(){
