@@ -83,7 +83,7 @@ public class Galeria {
 	
 	public static HashMap<String, Pieza> listadoInventario() {
 		
-		return Inventario.getlistadoinventario();
+		return Inventario.getListadoInventario();
 	}
 	
 	public static void agregarPieza(Pieza pieza) throws Exception {
