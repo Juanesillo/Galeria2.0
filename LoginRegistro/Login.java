@@ -49,9 +49,9 @@ public class Login {
         ListadoUsuario.put(nombre, passoword);
     }
 
-    //public static void RegistrarTrabajador(String nombre, Object passoword){
-       // Galeria.RegistrarTrabajador(nombre, passoword);
-    //}
+    public static void RegistrarTrabajador(String nombre, Object passoword){
+        Galeria.RegistrarTrabajador(nombre, passoword);
+    }
 
     public static HashMap<String,Object> getlistadoUser(){
 

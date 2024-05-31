@@ -80,7 +80,7 @@ public static void main(String[] args) throws Exception {
             System.out.println("Por favor Digite su contraseña");
             String password = scanner.nextLine();
             HashMap<String,Object>User = Galeria.listadoUsuarios();
-            HashMap<String,Object> trabajadores=Galeria.getTrabajadores();
+            HashMap<String,Object> trabajadores=Galeria.getListadoTrabajadores();
 
             if(User.containsKey(user) && User.get(user).equals(password)){
                 System.out.println("Bienvenido Usuario" + user+"\n");
@@ -392,7 +392,7 @@ public static void main(String[] args) throws Exception {
     // persistencia Trabajadores y usuarios
     public static void PersistenciaTrabajadoresClientes() throws IOException{
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Trabajadores=Galeria.getTrabajadores();
+        HashMap<String,Object> Trabajadores=Galeria.getListadoTrabajadores();
         HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {

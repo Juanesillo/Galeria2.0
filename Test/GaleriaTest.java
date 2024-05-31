@@ -25,8 +25,8 @@ public class GaleriaTest {
         Galeria.RegistrarTrabajador("Jack Slay", "9845632");
 
         // Verificar que el trabajador se haya registrado correctamente
-        assertTrue(Galeria.getTrabajadores().containsKey("Jack Slay"));
-        assertEquals("9845632", Galeria.getTrabajadores().get("Jack Slay"));
+        assertTrue(Galeria.getListadoTrabajadores().containsKey("Jack Slay"));
+        assertEquals("9845632", Galeria.getListadoTrabajadores().get("Jack Slay"));
     }
 
     @Test

@@ -31,10 +31,12 @@ public class Galeria {
         return ListaClientes;
     }
 
-
-    public static  HashMap<String,Object> getTrabajadores(){
-        return ListadoTrabajadores;
-    }
+    public static HashMap<String, Object> getListadoTrabajadores() {
+		
+		return ListadoTrabajadores;
+	}
+  
+   
 
     public static void RegistrarTrabajador(String user, Object password){
         ListadoTrabajadores.put(user, password);
@@ -112,11 +114,7 @@ public class Galeria {
         listaSubasta.add(subasta);
     }
 
-	public static HashMap<String, Object> getListadoTrabajadores() {
-		
-		return ListadoTrabajadores;
-	}
-  
+
 
 
 
