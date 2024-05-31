@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import Clientes.Cliente;
-import InventariosySubasta.Inventario;
+
 import InventariosySubasta.Pieza;
-import LoginRegistro.Login;
+
 import Trabajadores.Cajero;
 import Galeria.Galeria;
 
@@ -52,7 +52,7 @@ public static void main(String[] args) throws Exception {
         		HashMap<String,Object> Trabajadores= datosPersistencia.get(0);
         		HashMap<String,Object> Usuarios= datosPersistencia.get(1);
         		Galeria.setListadoTrabajadores(Trabajadores);
-        		Login.setListadoUsuario(Usuarios);
+        		Galeria.crearListadoUsuarios(Usuarios);
         		
         		PersistenciaTrabajadoresClientes(); }
             
@@ -79,7 +79,7 @@ public static void main(String[] args) throws Exception {
             String user= scanner.nextLine();
             System.out.println("Por favor Digite su contraseña");
             String password = scanner.nextLine();
-            HashMap<String,Object>User = Login.getlistadoUser();
+            HashMap<String,Object>User = Galeria.listadoUsuarios();
             HashMap<String,Object> trabajadores=Galeria.getTrabajadores();
 
             if(User.containsKey(user) && User.get(user).equals(password)){
@@ -165,7 +165,7 @@ public static void main(String[] args) throws Exception {
                         String key = entry.getKey();
                         Pieza value = entry.getValue();
                         // Agregar la pieza al inventario
-                        Inventario.AgregarDatos(value);
+                        Galeria.agregarPieza(value);
                         System.out.println(key +" Agregada con extio");
                     }
 
@@ -176,7 +176,7 @@ public static void main(String[] args) throws Exception {
             
             for (Entry<String, Integer> entry : Cajero.getRegistroCompras().entrySet()){
                 String nombre= entry.getKey();
-                Inventario.eliminarPieza(nombre);
+                Galeria.eliminarPieza(nombre);
                 System.out.println(nombre +" Pieza removida");
 
                 
@@ -230,14 +230,14 @@ public static void main(String[] args) throws Exception {
                 System.out.println("Valor de la pieza");
                 Integer valor= Integer.parseInt(scanner.nextLine());
 
-                if(Inventario.getListadoInventario().containsKey(nombre)){
+                if(Galeria.listadoInventario().containsKey(nombre)){
                     Cajero.RegistrarCompra(nombre, valor);
                     System.err.println("Pieza vendida");
 
                 }
                 else{
                     System.out.println("La pieza no se encuentra en el inventario Consultar Inventario");
-                    System.err.println(Inventario.getlistadoinventario());
+                    System.err.println(Galeria.listadoInventario());
                 }
                 
             }
@@ -295,7 +295,7 @@ public static void main(String[] args) throws Exception {
         // primeras validaciones consultar Historiales
         if(input.equals(1)){
             System.out.println("Estas son las piezas disponibles para comprar");
-            System.out.println(Inventario.getListadoInventario());
+            System.out.println(Galeria.listadoInventario());
             System.out.println("Nombre de la pieza que desea comprar");
             String Nombre= scanner.nextLine();
             // registrar la solicitud de compra para que el cajero la reciba
@@ -364,7 +364,7 @@ public static void main(String[] args) throws Exception {
             String user =scanner.nextLine();
             System.out.println("Por favor Digite su Contraseña: ");
             Object password = scanner.nextLine();
-            Login.RegistrarUsuario(user, password);
+            Galeria.agregarNuevoUsuario(user, password);
             System.out.println("Por favor digite su contacto: ");
             String contacto= scanner.nextLine();
             System.out.println("Por favor digite su cantidad de dinero");
@@ -380,7 +380,7 @@ public static void main(String[] args) throws Exception {
             String user =scanner.nextLine();
             System.out.println("Por favor Digite su Contraseña");
             Object password = scanner.nextLine();
-            Login.RegistrarTrabajador(user, password);
+            Galeria.RegistrarTrabajador(user, password);
         }
         else{
             System.out.println("\u001B[31mOpción no válida, por favor intente de nuevo\u001B[0m");
@@ -393,7 +393,7 @@ public static void main(String[] args) throws Exception {
     public static void PersistenciaTrabajadoresClientes() throws IOException{
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
         HashMap<String,Object> Trabajadores=Galeria.getTrabajadores();
-        HashMap<String,Object> Usuarios=Login.getlistadoUser();
+        HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             writer.write("=== Registro Trabajadores ===\n");
@@ -443,7 +443,7 @@ public static void main(String[] args) throws Exception {
 
         //TODO ajustar persistencia de inventario
         String nombreArchivo= "ArchivosPersistencia/Inventario.txt";
-        HashMap<String,Pieza> listadoD= Inventario.getlistadoinventario();
+        HashMap<String,Pieza> listadoD= Galeria.listadoInventario();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
         writer.write("=== ListadoDisponibles ===\n");
         for (java.util.Map.Entry<String, Pieza> entry:listadoD.entrySet()){
@@ -485,7 +485,7 @@ public static void main(String[] args) throws Exception {
                 }
                
                                             
-                Login.setListadoUsuario(Usuarios);
+                Galeria.crearListadoUsuarios(Usuarios);
                 
                 
                 break;
@@ -524,8 +524,8 @@ public static void main(String[] args) throws Exception {
     	System.out.println("Por favor Digite el nombre del artista a consultar");
         String nombre= scanner.nextLine();
         
-        if (Galeria.getHistorialArtists().containsKey(nombre)){ 
-        	System.out.println(Galeria.getHistorialArtista(nombre));}
+        if (Galeria.historialArtistas().containsKey(nombre)){ 
+        	System.out.println(Galeria.historialArtista(nombre));}
         else{
             System.out.println("Artista no encontrado...");
         }
@@ -537,8 +537,8 @@ public static void main(String[] args) throws Exception {
     	System.out.println("Por favor Digite el nombre de la pieza a consultar: ");
         String nombre= scanner.nextLine();
         
-        if (Galeria.getHistorialPiezas().containsKey(nombre)){ 
-        	System.out.println(Galeria.getHistorialPieza(nombre));}
+        if (Galeria.historialPiezas().containsKey(nombre)){ 
+        	System.out.println(Galeria.historialPieza(nombre));}
         else{
             System.out.println("Pieza no encontrada...");
         }

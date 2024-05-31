@@ -2,6 +2,7 @@ package Galeria;
 import java.util.ArrayList;
 import java.util.HashMap;
 import InventariosySubasta.Subasta;
+import LoginRegistro.Login;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
@@ -60,23 +61,49 @@ public class Galeria {
     public static HashMap<String,Pieza> getsolicituPiez(){ 
     	return SolicitudPieza;}
     
-	public static HashMap<String, ArrayList<Pieza>> getHistorialArtists() {
+	public static HashMap<String, ArrayList<Pieza>> historialArtistas() {
 		
 		return Inventario.getHistorialArtistas();
 	}
 
-	public static ArrayList<Pieza> getHistorialArtista(String nombre){
+	public static ArrayList<Pieza> historialArtista(String nombre){
         return Inventario.getArtista(nombre);
     }
 	
-	public static HashMap<String, Object> getHistorialPiezas() {
+	public static HashMap<String, Object> historialPiezas() {
 		
 		return Pieza.getHistorialPiezas();
 	}
 
-	public static Object getHistorialPieza(String nombre){
+	public static Object historialPieza(String nombre){
         return Pieza.getHistorialPieza(nombre);
     }
+	
+	public static HashMap<String, Pieza> listadoInventario() {
+		
+		return Inventario.getlistadoinventario();
+	}
+	
+	public static void agregarPieza(Pieza pieza) throws Exception {
+		Inventario.AgregarDatos(pieza);
+	}
+	
+	public static void eliminarPieza(String nombre) {
+		Inventario.eliminarPieza(nombre);
+	}
+	
+	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
+		Login.setListadoUsuario(listadoUsuario);
+	}
+	
+	public static HashMap<String, Object> listadoUsuarios() {
+		return Login.getlistadoUser();
+	}
+	
+	public static void agregarNuevoUsuario(String usuario, Object contraseña) {
+		Login.RegistrarUsuario(usuario, contraseña);
+	}
+	
 	
 
     // subastas existentes 
