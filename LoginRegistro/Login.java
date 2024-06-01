@@ -37,10 +37,6 @@ public class Login {
         return validacion; 
 
     }
-
-
-    
-
     public static void setListadoUsuario(HashMap<String, Object> listadoUsuario) {
         ListadoUsuario = listadoUsuario;
     }
