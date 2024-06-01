@@ -2,8 +2,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame5 extends JPanel {
-    public Frame5(MainApp mainApp) {
+public class MenuUser extends JPanel {
+    public MenuUser(MainApp mainApp) {
         setLayout(new GridLayout(4, 1));
 
         JButton buyButton = new JButton("Comprar una pieza");

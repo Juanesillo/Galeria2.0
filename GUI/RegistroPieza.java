@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame7 extends JPanel {
-    public Frame7(MainApp mainApp) {
+public class RegistroPieza extends JPanel {
+    public RegistroPieza(MainApp mainApp) {
         setLayout(new GridLayout(5, 2));
 
         JLabel nameLabel = new JLabel("Nombre:");

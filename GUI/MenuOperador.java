@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame6 extends JPanel {
-    public Frame6(MainApp mainApp) {
+public class MenuOperador extends JPanel {
+    public MenuOperador(MainApp mainApp) {
         setLayout(new GridLayout(4, 1));
 
         JButton buyButton = new JButton("Comprar una pieza");

@@ -3,22 +3,23 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+public class Login extends JPanel{
 
-public class Login extends JPanel {
-    public Login(MainApp mainApp) {
-        // agregar el titulo en la parte superiror 
-    JPanel titulo= new JPanel();
-    JLabel ltitulo= new JLabel("Bienvenido a Pinacoteca",JLabel.CENTER);
-    ltitulo.setFont(new Font("Arial",Font.BOLD,22));
-    titulo.add(ltitulo);
-    Login.this.add(titulo,BorderLayout.CENTER);
+	public Login() {
+        setLayout(new GridLayout(3, 2));
 
-        
+        JLabel userLabel = new JLabel("Usuario:");
+        JTextField userField = new JTextField();
+        JLabel passLabel = new JLabel("Contraseña:");
+        JPasswordField passField = new JPasswordField();
+        JButton loginButton = new JButton("Login");
 
-        JButton loginButton = new JButton("Iniciar sesión");
-        loginButton.addActionListener(e -> mainApp.showFrame("Frame2"));
-        add(loginButton, BorderLayout.SOUTH);
+       
 
-
+        add(userLabel);
+        add(userField);
+        add(passLabel);
+        add(passField);
+        add(loginButton);
     }
 }

@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame8 extends JPanel {
-    public Frame8(MainApp mainApp) {
+public class Inventario extends JPanel {
+    public Inventario(MainApp mainApp) {
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel("Estas son las piezas para comprar", SwingConstants.CENTER);

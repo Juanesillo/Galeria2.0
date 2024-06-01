@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame4 extends JPanel {
-    public Frame4(MainApp mainApp) {
+public class TipoUser extends JPanel {
+    public TipoUser(MainApp mainApp) {
         setLayout(new GridLayout(3, 1));
 
         JLabel label = new JLabel("¿Qué tipo de usuario es usted?", SwingConstants.CENTER);
