@@ -17,7 +17,7 @@ public class MainApp {
             public void run(){
             //  new  Login().setVisible(true);
 
-            new Frame2().setVisible(true);
+            new Login().setVisible(true);
 
 
                
