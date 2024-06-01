@@ -31,7 +31,8 @@ public class Inventario {
 
 
     //getter de estructuras de datos
-    public static HashMap<String,Pieza> getlistadoinventario(){
+    
+    public static HashMap<String,Pieza> getListadoInventario(){
         return ListadoInventario;
     }
     public HashMap<String,Pieza> exhibidas(){
@@ -84,14 +85,15 @@ public class Inventario {
     }
 
 
-    public static HashMap<String,ArrayList<Pieza>> getHistorialArtista(){
+    public static HashMap<String,ArrayList<Pieza>> getHistorialArtistas(){
         return Artistas;
     }
-
-
-    public static HashMap<String,Pieza> getListadoInventario(){
-        return ListadoInventario;
+    
+    public static ArrayList<Pieza> getArtista(String nombre){
+        return getHistorialArtistas().get(nombre);
     }
+
+   
 
     
 

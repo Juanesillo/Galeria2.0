@@ -2,6 +2,7 @@ package Galeria;
 import java.util.ArrayList;
 import java.util.HashMap;
 import InventariosySubasta.Subasta;
+import LoginRegistro.Login;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
@@ -26,19 +27,16 @@ public class Galeria {
     }    // Por consola se crearián piezas
 
 
-
     public static ArrayList<Cliente> getlistaClientes(){
         return ListaClientes;
     }
 
-    public HashMap<String,ArrayList<Pieza>> consultarArtista(){
-
-        return Inventario.getHistorialArtista();
-    }
-
-    public static  HashMap<String,Object> getTrabajadores(){
-        return ListadoTrabajadores;
-    }
+    public static HashMap<String, Object> getListadoTrabajadores() {
+		
+		return ListadoTrabajadores;
+	}
+  
+   
 
     public static void RegistrarTrabajador(String user, Object password){
         ListadoTrabajadores.put(user, password);
@@ -59,11 +57,56 @@ public class Galeria {
 
 
     public static void comprar(String nombre){
-
         SolicitudCompra.add(nombre);
     }
 
-    public static HashMap<String,Pieza> getsolicituPiez(){ return SolicitudPieza;}
+    public static HashMap<String,Pieza> getsolicituPiez(){ 
+    	return SolicitudPieza;}
+    
+	public static HashMap<String, ArrayList<Pieza>> historialArtistas() {
+		
+		return Inventario.getHistorialArtistas();
+	}
+
+	public static ArrayList<Pieza> historialArtista(String nombre){
+        return Inventario.getArtista(nombre);
+    }
+	
+	public static HashMap<String, Object> historialPiezas() {
+		
+		return Pieza.getHistorialPiezas();
+	}
+
+	public static Object historialPieza(String nombre){
+        return Pieza.getHistorialPieza(nombre);
+    }
+	
+	public static HashMap<String, Pieza> listadoInventario() {
+		
+		return Inventario.getListadoInventario();
+	}
+	
+	public static void agregarPieza(Pieza pieza) throws Exception {
+		Inventario.AgregarDatos(pieza);
+	}
+	
+	public static void eliminarPieza(String nombre) {
+		Inventario.eliminarPieza(nombre);
+	}
+	
+	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
+		Login.setListadoUsuario(listadoUsuario);
+	}
+	
+	public static HashMap<String, Object> listadoUsuarios() {
+		return Login.getlistadoUser();
+	}
+	
+	public static void agregarNuevoUsuario(String usuario, Object contraseña) {
+		Login.RegistrarUsuario(usuario, contraseña);
+	}
+	
+	
 
     // subastas existentes 
     public static void AgregarSubasta(Subasta subasta){
@@ -82,5 +125,6 @@ public class Galeria {
 
 
 
+	
 
 }
