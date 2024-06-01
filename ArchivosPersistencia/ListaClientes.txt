@@ -1,8 +1,1 @@
-<<<<<<< HEAD
 Contacto/Dinero/Validacion/User/password
-=======
-Contacto/Dinero/Validacion/User/password256987536,8000.0,false,Juan,123
-
-25963478,5000.0,false,Carlos,123
-
->>>>>>> e075f8ca3c039f5a38f5fc0bab2f9ea7eda8c302

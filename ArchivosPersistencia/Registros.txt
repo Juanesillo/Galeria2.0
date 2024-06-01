@@ -1,6 +1,3 @@
 === Registro Trabajadores ===
-Cajero: 123
-Admin: 123
+Admin: 12345
 === Registro Usuarios ===
-Juan: 123
-Carlos: 123
