@@ -16,7 +16,7 @@ import Clientes.Cliente;
 import InventariosySubasta.Pieza;
 import InventariosySubasta.Subasta;
 import Trabajadores.Cajero;
-import Trabajadores.Operador;
+
 import Galeria.Galeria;
 
 public class ConsolaLogin {
