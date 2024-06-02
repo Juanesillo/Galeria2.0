@@ -100,7 +100,7 @@ public class Inicio extends JFrame {
         rules.fill = GridBagConstraints.HORIZONTAL;
         logframe.add(registro, rules);
         // ajustes Boton de registro 
-
+        
 
         registro.addActionListener(new ActionListener() {
 
@@ -109,7 +109,7 @@ public class Inicio extends JFrame {
                 Inicio.this.dispose();
                 Registro registro= new Registro();
                 registro.setVisible(true);
-                JOptionPane.showMessageDialog(login, "Valide su informació");
+                JOptionPane.showMessageDialog(login, "Valide su información");
 
             }
             
