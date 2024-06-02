@@ -14,8 +14,6 @@ public class Administrador extends userregister {
 
     public Administrador(String user, Object password) {
         super(user, password);
-        
-        
     }
 
 
@@ -31,5 +29,29 @@ public class Administrador extends userregister {
         
       
     }
+    
+	// Gestion de las Piezas
+	
+	
+	public static void agregarPieza(Pieza pieza) throws Exception {
+		Inventario.AgregarDatos(pieza);
+	}
+	
+	public static void eliminarPieza(String nombre) {
+		Inventario.eliminarPieza(nombre);
+	}
+	
+	// Usuarios
+	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
+		userregister.setListadoUsuario(listadoUsuario);
+	}
+	
+	public static HashMap<String, Object> listadoUsuarios() {
+		return userregister.getlistadoUser();
+	}
+	
+	public static void agregarNuevoUsuario(String usuario, Object contraseña) {
+		userregister.RegistrarUsuario(usuario, contraseña);
+	}
 
 }

@@ -7,6 +7,7 @@ import Clientes.Cliente;
 import Galeria.Galeria;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
+import Trabajadores.Administrador;
 import Trabajadores.Cajero;
 
 import java.awt.*;
@@ -43,7 +44,7 @@ public class MenuAdmin extends JFrame {
         // Crear los botones
         JButton validarUsuarioBtn = new JButton("Validar Usuario");
         JButton agregarPiezasBtn = new JButton("Agregar Piezas a Inventario");
-        JButton eliminarInventarioBtn = new JButton("Eliminar Inventario");
+        JButton eliminarInventarioBtn = new JButton("Eliminar pieza del Inventario");
         JButton consultarHistorialPiezaBtn = new JButton("Consultar Historial Pieza");
         JButton consultarHistorialArtistaBtn = new JButton("Consultar Historial Artista");
         JButton calendarioVentasBtn = new JButton("Calendario de Ventas");
@@ -161,7 +162,7 @@ public class MenuAdmin extends JFrame {
         for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
             Pieza pieza = entry.getValue();
             try {
-                Galeria.agregarPieza(pieza);
+                Administrador.agregarPieza(pieza);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -179,9 +180,7 @@ public class MenuAdmin extends JFrame {
 
 
 
-// eliminar del inventario
-
-
+// eliminar pieza del inventario
     private JPanel crearPanelEliminarInventario() {
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
@@ -203,9 +202,9 @@ public class MenuAdmin extends JFrame {
     JButton eliminarPiezaButton = new JButton("Eliminar");
     eliminarPiezaButton.addActionListener(e -> {
         String nombrePieza = nombrePiezaTextField.getText();
-        if (Inventario.getListadoInventario().containsKey(nombrePieza)){
+        if (Galeria.listadoInventario().containsKey(nombrePieza)){
 
-            Galeria.eliminarPieza(nombrePieza);
+            Administrador.eliminarPieza(nombrePieza);
             JOptionPane.showMessageDialog(MenuAdmin.this, "Pieza " + nombrePieza + " eliminada del inventario.");
         }
         else{

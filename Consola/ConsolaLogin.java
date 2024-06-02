@@ -16,6 +16,7 @@ import Clientes.Cliente;
 import InventariosySubasta.Pieza;
 import InventariosySubasta.Subasta;
 import LoginRegistro.userregister;
+import Trabajadores.Administrador;
 import Trabajadores.Cajero;
 
 import Galeria.Galeria;
@@ -54,7 +55,7 @@ public static void main(String[] args) throws Exception {
         		HashMap<String,Object> Trabajadores= datosPersistencia.get(0);
         		HashMap<String,Object> Usuarios= datosPersistencia.get(1);
         		userregister.setListadoTrabajadores(Trabajadores);
-        		Galeria.crearListadoUsuarios(Usuarios);
+        		Administrador.crearListadoUsuarios(Usuarios);
         		
         		PersistenciaTrabajadoresClientes(); }
             
@@ -81,7 +82,7 @@ public static void main(String[] args) throws Exception {
             String user= scanner.nextLine();
             System.out.println("Por favor Digite su contraseña");
             String password = scanner.nextLine();
-            HashMap<String,Object>User = Galeria.listadoUsuarios();
+            HashMap<String,Object>User = Administrador.listadoUsuarios();
             HashMap<String,Object> trabajadores=userregister.getlistadoUser();
 
             if(User.containsKey(user) && User.get(user).equals(password)){
@@ -167,7 +168,7 @@ public static void main(String[] args) throws Exception {
                         String key = entry.getKey();
                         Pieza value = entry.getValue();
                         // Agregar la pieza al inventario
-                        Galeria.agregarPieza(value);
+                        Administrador.agregarPieza(value);
                         System.out.println(key +" Agregada con extio");
                     }
 
@@ -178,7 +179,7 @@ public static void main(String[] args) throws Exception {
             
             for (Entry<String, Integer> entry : Cajero.getRegistroCompras().entrySet()){
                 String nombre= entry.getKey();
-                Galeria.eliminarPieza(nombre);
+                Administrador.eliminarPieza(nombre);
                 System.out.println(nombre +" Pieza removida");
 
                 
@@ -377,7 +378,7 @@ public static void main(String[] args) throws Exception {
             String user =scanner.nextLine();
             System.out.println("Por favor Digite su Contraseña: ");
             Object password = scanner.nextLine();
-            Galeria.agregarNuevoUsuario(user, password);
+            Administrador.agregarNuevoUsuario(user, password);
             System.out.println("Por favor digite su contacto: ");
             String contacto= scanner.nextLine();
             System.out.println("Por favor digite su cantidad de dinero");
@@ -406,7 +407,7 @@ public static void main(String[] args) throws Exception {
     public static void PersistenciaTrabajadoresClientes() throws IOException{
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
         HashMap<String,Object> Trabajadores=userregister.getlistadoUser();
-        HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
+        HashMap<String,Object> Usuarios=Administrador.listadoUsuarios();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             writer.write("=== Registro Trabajadores ===\n");
@@ -498,7 +499,7 @@ public static void main(String[] args) throws Exception {
                 }
                
                                             
-                Galeria.crearListadoUsuarios(Usuarios);
+                Administrador.crearListadoUsuarios(Usuarios);
                 
                 
                 break;

@@ -68,33 +68,6 @@ public class Galeria {
         return Pieza.getHistorialPieza(nombre);
     }
 	
-	// Inventario y pieza
-	
-	public static HashMap<String, Pieza> listadoInventario() {
-		
-		return Inventario.getListadoInventario();
-	}
-	
-	public static void agregarPieza(Pieza pieza) throws Exception {
-		Inventario.AgregarDatos(pieza);
-	}
-	
-	public static void eliminarPieza(String nombre) {
-		Inventario.eliminarPieza(nombre);
-	}
-	
-	// Usuarios
-	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
-		userregister.setListadoUsuario(listadoUsuario);
-	}
-	
-	public static HashMap<String, Object> listadoUsuarios() {
-		return userregister.getlistadoUser();
-	}
-	
-	public static void agregarNuevoUsuario(String usuario, Object contraseña) {
-		userregister.RegistrarUsuario(usuario, contraseña);
-	}
 	
 	// Trabajadores
 	public static void crearListadoTrabajadores(HashMap<String, Object> listadoTrabajadores) {
@@ -103,6 +76,11 @@ public class Galeria {
 	public static HashMap<String, Object> listadoTrabajadores() {
 		return userregister.getListadoTrabajadores();
 	}
+	
+	//Inventario
+	public static HashMap<String, Pieza> listadoInventario() {
+		
+		return Inventario.getListadoInventario();}
 	
 
     // subastas existentes 

@@ -118,8 +118,9 @@ public class Login extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                HashMap<String,Object>User = Galeria.Galeria.listadoUsuarios();
+            	// Se le pide al administrador los clientes
+                HashMap<String,Object>User = Trabajadores.Administrador.listadoUsuarios();
+                // Se le pide a la galeria los trabajadores (admin, cajero y operador)
                 HashMap<String,Object> trabajadores=Galeria.Galeria.listadoTrabajadores();
 
 
@@ -128,19 +129,18 @@ public class Login extends JFrame {
                 String username = user.getText();
                 String passwordText = String.valueOf(password.getPassword());
 
-                // Simulación de autenticación (puedes reemplazar esto con tu lógica)
+                // Simulación de autenticación 
                 if (trabajadores.containsKey(username) && trabajadores.get(username).equals(passwordText)) {
-                    // validaciones para los trabajadores 
+                    // validaciones para los trabajadores
+                	
                     //interfaz administrador
                     if (username.equals("admin")){
                     Login.this.dispose();
                     MenuAdmin menuAdmin= new MenuAdmin();
                     menuAdmin.setVisible(true);
                     JOptionPane.showMessageDialog(menuAdmin, "Bienvenido Administrador");
-
-                    
-
                     }
+                    
                     //interfaz Cajero
                     else if (username.equals("Cajero")){
                         Login.this.dispose();
@@ -149,6 +149,7 @@ public class Login extends JFrame {
                         JOptionPane.showMessageDialog(MenuCajero, "Bienvenido Cajero");
 
                     }
+                    
                     //interfaz Operador
                     else if (username.equals("Operador")){
                         Login.this.dispose();

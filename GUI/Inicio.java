@@ -4,7 +4,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import Galeria.Galeria;
-
+import Trabajadores.Administrador;
 
 import java.awt.*;
 
@@ -59,7 +59,8 @@ public class Inicio extends JFrame {
 
     try {
         HashMap<String, Object> users= leerTrabajadoresClientes();
-        Galeria.crearListadoUsuarios(users);
+        //el administrador crear a los clientes
+        Administrador.crearListadoUsuarios(users);
     } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
