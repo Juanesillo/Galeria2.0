@@ -3,13 +3,17 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Clientes.Cliente;
+import Galeria.Galeria;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MenuAdmin extends JFrame {
     private JPanel panelDerecho;
 
     public MenuAdmin() {
-        super("Administrador Galeria");
+          super("Administrador Galeria");
 
         // Establecer el tamaño de la ventana
         this.setSize(800, 600);
@@ -27,7 +31,7 @@ public class MenuAdmin extends JFrame {
     private void iniciar() {
         // Crear el panel izquierdo con los botones
         JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setLayout(new GridLayout(6, 1, 10, 10));
+        panelIzquierdo.setLayout(new GridLayout(7, 1, 10, 10));  // Cambiado a 7 filas para el nuevo botón
         panelIzquierdo.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Crear los botones
@@ -36,6 +40,7 @@ public class MenuAdmin extends JFrame {
         JButton eliminarInventarioBtn = new JButton("Eliminar Inventario");
         JButton consultarHistorialPiezaBtn = new JButton("Consultar Historial Pieza");
         JButton consultarHistorialArtistaBtn = new JButton("Consultar Historial Artista");
+        JButton calendarioVentasBtn = new JButton("Calendario de Ventas");
         JButton salirBtn = new JButton("Salir");
 
         // Agregar los botones al panel izquierdo
@@ -44,6 +49,7 @@ public class MenuAdmin extends JFrame {
         panelIzquierdo.add(eliminarInventarioBtn);
         panelIzquierdo.add(consultarHistorialPiezaBtn);
         panelIzquierdo.add(consultarHistorialArtistaBtn);
+        panelIzquierdo.add(calendarioVentasBtn);
         panelIzquierdo.add(salirBtn);
 
         // Crear el panel derecho donde se mostrarán los distintos paneles
@@ -57,6 +63,7 @@ public class MenuAdmin extends JFrame {
         panelDerecho.add(crearPanelEliminarInventario(), "EliminarInventario");
         panelDerecho.add(crearPanelConsultarHistorialPieza(), "ConsultarHistorialPieza");
         panelDerecho.add(crearPanelConsultarHistorialArtista(), "ConsultarHistorialArtista");
+        panelDerecho.add(crearPanelCalendarioVentas(), "CalendarioVentas");
 
         // Añadir ActionListeners a los botones
         validarUsuarioBtn.addActionListener(e -> mostrarPanel("ValidarUsuario"));
@@ -64,6 +71,7 @@ public class MenuAdmin extends JFrame {
         eliminarInventarioBtn.addActionListener(e -> mostrarPanel("EliminarInventario"));
         consultarHistorialPiezaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialPieza"));
         consultarHistorialArtistaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialArtista"));
+        calendarioVentasBtn.addActionListener(e -> mostrarPanel("CalendarioVentas"));
         salirBtn.addActionListener(e -> System.exit(0));
 
         // Crear el JSplitPane para dividir la ventana en dos partes
@@ -74,16 +82,42 @@ public class MenuAdmin extends JFrame {
         this.add(splitPane);
     }
 
+
+
+    // se empieza a modificar el contenido a la derecha de los paneles 
     private void mostrarPanel(String nombrePanel) {
         CardLayout cl = (CardLayout) (panelDerecho.getLayout());
         cl.show(panelDerecho, nombrePanel);
     }
 
     private JPanel crearPanelValidarUsuario() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Validar Usuario"));
-        // Agregar los componentes necesarios para validar usuario
-        return panel;
+    ArrayList<Cliente>   listaClientes= Galeria.getlistaClientes();
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
+
+    // Lista de usuarios
+    DefaultListModel<String> modeloLista = new DefaultListModel<>();
+    JList<String> listaUsuarios = new JList<>(modeloLista);
+    JScrollPane scrollPane = new JScrollPane(listaUsuarios);
+
+    for (Cliente cliente : listaClientes) {
+        modeloLista.addElement(cliente.getContacto()); 
+    }
+
+    panel.add(scrollPane, BorderLayout.CENTER);
+
+    // Botón para validar clientes
+    JButton validarClientesButton = new JButton("Validar Clientes");
+    validarClientesButton.addActionListener(e -> {
+        // Iterar sobre la lista de clientes y cambiar el estado de validado a true
+        for (Cliente cliente : listaClientes) {
+            cliente.setValidacion(true);
+        }
+        JOptionPane.showMessageDialog(MenuAdmin.this, "Todos los clientes han sido validados.");
+    });
+    panel.add(validarClientesButton, BorderLayout.SOUTH);
+
+    return panel;
     }
 
     private JPanel crearPanelAgregarPiezas() {
@@ -111,6 +145,13 @@ public class MenuAdmin extends JFrame {
         JPanel panel = new JPanel();
         panel.add(new JLabel("Panel de Consultar Historial Artista"));
         // Agregar los componentes necesarios para consultar historial de artista
+        return panel;
+    }
+
+    private JPanel crearPanelCalendarioVentas() {
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Panel de Calendario de Ventas"));
+        // Agregar los componentes necesarios para el calendario de ventas
         return panel;
     }
 

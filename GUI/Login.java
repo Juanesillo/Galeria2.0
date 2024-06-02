@@ -129,20 +129,19 @@ public class Login extends JFrame {
 
                 // Simulación de autenticación (puedes reemplazar esto con tu lógica)
                 if (trabajadores.containsKey(username) && trabajadores.get(username).equals(passwordText)) {
-                    JOptionPane.showMessageDialog(Login.this, "Bienvenido Señor administrador");
                     // validaciones para los trabajadores 
                     //interfaz administrador
-                    if (user.equals("Admin")){
-                        Login.this.dispose();
-                       MenuAdmin menuAdmin= new MenuAdmin();
-                        menuAdmin.setVisible(true);
-                        JOptionPane.showMessageDialog(menuAdmin, "Bienvenido Administrador");
+                    if (username.equals("admin")){
+                    Login.this.dispose();
+                    MenuAdmin menuAdmin= new MenuAdmin();
+                    menuAdmin.setVisible(true);
+                    JOptionPane.showMessageDialog(menuAdmin, "Bienvenido Administrador");
 
                     
 
                     }
                     //interfaz Cajero
-                    else if (user.equals("Cajero")){
+                    else if (username.equals("Cajero")){
                         Login.this.dispose();
                         menuCajero MenuCajero= new menuCajero();
                         MenuCajero.setVisible(true);
@@ -150,7 +149,7 @@ public class Login extends JFrame {
 
                     }
                     //interfaz Operador
-                    else if (user.equals("Operador")){
+                    else if (username.equals("Operador")){
                         Login.this.dispose();
                         MenuOperador menuOperador= new MenuOperador();
                         menuOperador.setVisible(true);
