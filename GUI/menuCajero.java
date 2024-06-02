@@ -3,12 +3,18 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Galeria.Galeria;
+import Trabajadores.Cajero;
+import InventariosySubasta.Inventario;
+import InventariosySubasta.Pieza;
+import InventariosySubasta.Subasta;
 import java.awt.*;
-
+import java.util.*;
+import java.util.Map.Entry;
 public class menuCajero extends JFrame {
     private JPanel panelDerecho;
     public menuCajero() {
-        super("Administrador Galeria");
+        super("Cajero Galería");
 
         // Establecer el tamaño de la ventana
         this.setSize(800, 600);
@@ -26,21 +32,19 @@ public class menuCajero extends JFrame {
     private void iniciar() {
         // Crear el panel izquierdo con los botones
         JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setLayout(new GridLayout(6, 1, 10, 10));
+        panelIzquierdo.setLayout(new GridLayout(5, 1, 10, 10));
         panelIzquierdo.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Crear los botones
-        JButton validarUsuarioBtn = new JButton("Validar Usuario");
-        JButton agregarPiezasBtn = new JButton("Agregar Piezas a Inventario");
-        JButton eliminarInventarioBtn = new JButton("Eliminar Inventario");
+        JButton registrarPagoBtn = new JButton("Registrar Pago");
+        JButton cobrarSubastaBtn = new JButton("Cobrar Subasta");
         JButton consultarHistorialPiezaBtn = new JButton("Consultar Historial Pieza");
         JButton consultarHistorialArtistaBtn = new JButton("Consultar Historial Artista");
         JButton salirBtn = new JButton("Salir");
 
         // Agregar los botones al panel izquierdo
-        panelIzquierdo.add(validarUsuarioBtn);
-        panelIzquierdo.add(agregarPiezasBtn);
-        panelIzquierdo.add(eliminarInventarioBtn);
+        panelIzquierdo.add(registrarPagoBtn);
+        panelIzquierdo.add(cobrarSubastaBtn);
         panelIzquierdo.add(consultarHistorialPiezaBtn);
         panelIzquierdo.add(consultarHistorialArtistaBtn);
         panelIzquierdo.add(salirBtn);
@@ -51,16 +55,14 @@ public class menuCajero extends JFrame {
 
         // Agregar paneles a la derecha
         panelDerecho.add(new JPanel(), "Vacio");
-        panelDerecho.add(crearPanelValidarUsuario(), "ValidarUsuario");
-        panelDerecho.add(crearPanelAgregarPiezas(), "AgregarPiezas");
-        panelDerecho.add(crearPanelEliminarInventario(), "EliminarInventario");
+        panelDerecho.add(crearPanelRegistrarPago(), "RegistrarPago");
+        panelDerecho.add(crearPanelCobrarSubasta(), "CobrarSubasta");
         panelDerecho.add(crearPanelConsultarHistorialPieza(), "ConsultarHistorialPieza");
         panelDerecho.add(crearPanelConsultarHistorialArtista(), "ConsultarHistorialArtista");
 
         // Añadir ActionListeners a los botones
-        validarUsuarioBtn.addActionListener(e -> mostrarPanel("ValidarUsuario"));
-        agregarPiezasBtn.addActionListener(e -> mostrarPanel("AgregarPiezas"));
-        eliminarInventarioBtn.addActionListener(e -> mostrarPanel("EliminarInventario"));
+        registrarPagoBtn.addActionListener(e -> mostrarPanel("RegistrarPago"));
+        cobrarSubastaBtn.addActionListener(e -> mostrarPanel("CobrarSubasta"));
         consultarHistorialPiezaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialPieza"));
         consultarHistorialArtistaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialArtista"));
         salirBtn.addActionListener(e -> System.exit(0));
@@ -78,39 +80,174 @@ public class menuCajero extends JFrame {
         cl.show(panelDerecho, nombrePanel);
     }
 
-    private JPanel crearPanelValidarUsuario() {
+    private JPanel crearPanelRegistrarPago() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Validar Usuario"));
-        // Agregar los componentes necesarios para validar usuario
+        panel.setLayout(new BorderLayout());
+    
+        // Panel para ingresar el nombre de la pieza y el precio
+        JTextField nombrePiezaTextField = new JTextField(20);
+        JTextField precioTextField = new JTextField(20);
+        JPanel panelNombreYPrecio = new JPanel(new GridLayout(2, 2, 5, 5));
+        panelNombreYPrecio.add(new JLabel("Nombre de la pieza: "));
+        panelNombreYPrecio.add(nombrePiezaTextField);
+        panelNombreYPrecio.add(new JLabel("Precio: "));
+        panelNombreYPrecio.add(precioTextField);
+    
+        // Panel para el botón de registro de pago
+        JButton registrarPagoButton = new JButton("Registrar Pago");
+        JPanel panelBoton = new JPanel();
+        panelBoton.add(registrarPagoButton);
+    
+        // Acción al presionar el botón de registro de pago
+        registrarPagoButton.addActionListener(e -> {
+            String nombrePieza = nombrePiezaTextField.getText();
+            Integer precio = Integer.parseInt(precioTextField.getText());
+           
+
+            
+                if(Galeria.listadoInventario().containsKey(nombrePieza)){
+                    Cajero.RegistrarCompra(nombrePieza, precio);
+                    JOptionPane.showMessageDialog(menuCajero.this, "Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio);
+                }
+                else{
+                    JOptionPane.showMessageDialog(menuCajero.this, "No se encontró la pieza");
+                    System.err.println(Galeria.listadoInventario());
+                }
+
+            
+            nombrePiezaTextField.setText(""); // Limpiar el campo de texto después del registro
+            precioTextField.setText(""); // Limpiar el campo de texto después del registro
+        });
+    
+        // Panel para organizar los componentes
+        JPanel panelRegistroPago = new JPanel();
+        panelRegistroPago.setLayout(new BorderLayout());
+        panelRegistroPago.add(panelNombreYPrecio, BorderLayout.CENTER);
+        panelRegistroPago.add(panelBoton, BorderLayout.SOUTH);
+    
+        panel.add(panelRegistroPago, BorderLayout.CENTER);
+    
         return panel;
     }
 
-    private JPanel crearPanelAgregarPiezas() {
+    private JPanel crearPanelCobrarSubasta() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Agregar Piezas a Inventario"));
-        // Agregar los componentes necesarios para agregar piezas a inventario
-        return panel;
-    }
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    
+        // Botón para cobrar subasta
+        JButton cobrarSubastaButton = new JButton("Cobrar Subasta");
+        panel.add(cobrarSubastaButton);
+    
+        // Acción al presionar el botón de cobrar subasta
+        cobrarSubastaButton.addActionListener(e -> {
+           ArrayList<Subasta> subastas =  Galeria.getSubastas();
+                for(int i=0; i< Galeria.getSubastas().size();i++){  
+                    subastas.get(i);
+                    for( Entry<String, Integer> entry:  Subasta.getOfertas().entrySet()){
 
-    private JPanel crearPanelEliminarInventario() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Eliminar Inventario"));
-        // Agregar los componentes necesarios para eliminar inventario
+                        String nombre= entry.getKey(); // nombre del cliente
+                        Integer value = entry.getValue();
+                        Cajero.RegistrarCompra(nombre, value);
+                    }}
+            JOptionPane.showMessageDialog(menuCajero.this, "Subastas cobradas exitosamente.");
+        });
+    
         return panel;
     }
 
     private JPanel crearPanelConsultarHistorialPieza() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Consultar Historial Pieza"));
-        // Agregar los componentes necesarios para consultar historial de pieza
+        panel.setLayout(new BorderLayout());
+    
+        // Panel para ingresar el nombre de la pieza
+        JTextField nombrePiezaTextField = new JTextField(20);
+        JPanel panelNombrePieza = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelNombrePieza.add(new JLabel("Nombre de la pieza: "));
+        panelNombrePieza.add(nombrePiezaTextField);
+    
+        // Panel para el botón de consulta
+        JButton consultarHistorialButton = new JButton("Consultar Historial");
+        JPanel panelBoton = new JPanel();
+        panelBoton.add(consultarHistorialButton);
+    
+        // Panel para mostrar el historial
+        JTextArea historialTextArea = new JTextArea(10, 30);
+        historialTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(historialTextArea);
+    
+        // Acción al presionar el botón de consulta
+        consultarHistorialButton.addActionListener(e -> {
+            String nombrePieza = nombrePiezaTextField.getText();
+            
+            ArrayList<Object> historial = Galeria.historialPieza(nombrePieza);
+            if (historial != null && !historial.isEmpty()) {
+                historialTextArea.setText(""); // Limpiar el área de texto
+                for (Object item : historial) {
+                    historialTextArea.append(item.toString() + "\n");
+                }
+            } else {
+                historialTextArea.setText("La pieza no tiene historial registrado.");
+            }
+        });
+    
+        // Panel para organizar los componentes
+        JPanel panelConsulta = new JPanel();
+        panelConsulta.setLayout(new BorderLayout());
+        panelConsulta.add(panelNombrePieza, BorderLayout.NORTH);
+        panelConsulta.add(panelBoton, BorderLayout.CENTER);
+        panelConsulta.add(scrollPane, BorderLayout.SOUTH);
+    
+        panel.add(panelConsulta, BorderLayout.CENTER);
+    
         return panel;
     }
 
     private JPanel crearPanelConsultarHistorialArtista() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Consultar Historial Artista"));
-        // Agregar los componentes necesarios para consultar historial de artista
-        return panel;
+    panel.setLayout(new BorderLayout());
+
+    // Panel para ingresar el nombre del artista
+    JTextField nombreArtistaTextField = new JTextField(20);
+    JPanel panelNombreArtista = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    panelNombreArtista.add(new JLabel("Nombre del artista: "));
+    panelNombreArtista.add(nombreArtistaTextField);
+
+    // Panel para el botón de consulta
+    JButton consultarHistorialButton = new JButton("Consultar Historial");
+    JPanel panelBoton = new JPanel();
+    panelBoton.add(consultarHistorialButton);
+
+    // Panel para mostrar el historial
+    JTextArea historialTextArea = new JTextArea(10, 30);
+    historialTextArea.setEditable(false);
+    JScrollPane scrollPane = new JScrollPane(historialTextArea);
+
+    // Acción al presionar el botón de consulta
+    consultarHistorialButton.addActionListener(e -> {
+        String nombreArtista = nombreArtistaTextField.getText();
+        //agregar al historial antes de imprimirlo 
+        Inventario.AgregarHistorialArtista(nombreArtista);
+        ArrayList<Pieza> historial = Galeria.historialArtista(nombreArtista);
+        if (historial != null && !historial.isEmpty()) {
+            historialTextArea.setText(""); // Limpiar el área de texto
+            for (Object item : historial) {
+                historialTextArea.append(item.toString() + "\n");
+            }
+        } else {
+            historialTextArea.setText("El artista no tiene historial registrado.");
+        }
+    });
+
+    // Panel para organizar los componentes
+    JPanel panelConsulta = new JPanel();
+    panelConsulta.setLayout(new BorderLayout());
+    panelConsulta.add(panelNombreArtista, BorderLayout.NORTH);
+    panelConsulta.add(panelBoton, BorderLayout.CENTER);
+    panelConsulta.add(scrollPane, BorderLayout.SOUTH);
+
+    panel.add(panelConsulta, BorderLayout.CENTER);
+
+    return panel;
     }
 
     public static void main(String[] args) {
