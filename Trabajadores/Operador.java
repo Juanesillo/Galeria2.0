@@ -22,10 +22,10 @@ public class Operador extends userregister{
         return Ganadores;
     }
 
-    public void registrarSubasta(String nombre, Integer precio){
+    public static void registrarSubasta(String nombre, Integer precio){
         Subasta.Registro(nombre, precio);
     }
-    public static void registroGanador(Subasta subasta){
+    public static void registroGanador(){
 
         Integer maxValor=0;
         String claveMaxValor = null;
@@ -41,7 +41,7 @@ public class Operador extends userregister{
 
                     }
         Cajero.RegistrarCompra(claveMaxValor, maxValor);
-        Ganadores.put(claveMaxValor, subasta.getPieza());
+        Ganadores.put(claveMaxValor, Subasta.getPieza());
 
 
 
