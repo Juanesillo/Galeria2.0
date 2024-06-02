@@ -100,6 +100,9 @@ public class Galeria {
 	public static void crearListadoTrabajadores(HashMap<String, Object> listadoTrabajadores) {
 		userregister.setListadoTrabajadores(listadoTrabajadores);
 	}
+	public static HashMap<String, Object> listadoTrabajadores() {
+		return userregister.getListadoTrabajadores();
+	}
 	
 
     // subastas existentes 

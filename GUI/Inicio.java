@@ -112,6 +112,8 @@ public class Inicio extends JFrame {
         rules.fill = GridBagConstraints.HORIZONTAL;
 
         //funcionalidad de los botones
+        
+        //Boton de LOGIN 
 
         login.addActionListener(new ActionListener() {
 
@@ -130,7 +132,7 @@ public class Inicio extends JFrame {
         // Agregar el panel al centro del JFrame
        
 
-        //considerando el boton de registro 
+        //Boton de REGISTRO 
         
         JButton registro = new JButton("REGISTRO");
         rules.gridx = 1;
@@ -138,9 +140,8 @@ public class Inicio extends JFrame {
         rules.gridwidth = 1;
         rules.fill = GridBagConstraints.HORIZONTAL;
         logframe.add(registro, rules);
-        // ajustes Boton de registro 
         
-
+        // ajustes Boton de registro 
         registro.addActionListener(new ActionListener() {
 
             @Override

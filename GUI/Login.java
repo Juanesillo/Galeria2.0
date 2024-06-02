@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+
 public class Login extends JFrame {
     public Login() {
         super("Login Galeria");
@@ -113,13 +114,13 @@ public class Login extends JFrame {
             }
         });
 
-        // Acción para el botón de login (puedes personalizar esto según tus necesidades)
+        // Acción para el botón de login 
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                HashMap<String,Object>User = LoginRegistro.userregister.getlistadoUser();
-                HashMap<String,Object> trabajadores=LoginRegistro.userregister.getListadoTrabajadores();
+                HashMap<String,Object>User = Galeria.Galeria.listadoUsuarios();
+                HashMap<String,Object> trabajadores=Galeria.Galeria.listadoTrabajadores();
 
 
 
