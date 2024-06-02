@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 
 import Clientes.Cliente;
 import Galeria.Galeria;
-import LoginRegistro.userregister;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Registro extends JFrame {
+	
     public Registro() {
         super("Registro de Usuario");
 
@@ -146,7 +146,7 @@ public class Registro extends JFrame {
                double money= Double.parseDouble(dinero.getText());
                Cliente cliente= new Cliente(usuario, false, contact, contrasenia, money);
                Galeria.agregarCliente(cliente);
-              userregister.RegistrarUsuario(usuario, contrasenia);
+              Galeria.agregarNuevoUsuario(usuario, contrasenia);
               try {
                 PersistenciaTrabajadoresClientes();
             } catch (IOException e1) {
@@ -189,7 +189,7 @@ public class Registro extends JFrame {
 
       public static void PersistenciaTrabajadoresClientes() throws IOException{
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Usuarios=userregister.getlistadoUser();
+        HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             writer.write("=== Registro Usuarios ===\n");
