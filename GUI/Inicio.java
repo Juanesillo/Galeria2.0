@@ -2,11 +2,14 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+
 import Galeria.Galeria;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class Inicio extends JFrame {
     public Inicio() {
@@ -27,8 +30,21 @@ public class Inicio extends JFrame {
 
 
     public static Galeria galeria= new Galeria();
+    
+
+
+
+
+
+
 
     private void iniciar() {
+
+     
+
+
+
+
         // Agregar el título en la parte superior
         JPanel titulo = new JPanel();
         JLabel ltitulo = new JLabel("Bienvenido a Pinacoteca", JLabel.CENTER);

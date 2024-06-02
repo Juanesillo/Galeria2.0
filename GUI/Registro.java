@@ -9,11 +9,6 @@ import Galeria.Galeria;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Registro extends JFrame {
     public Registro() {
@@ -151,13 +146,6 @@ public class Registro extends JFrame {
                 Registro.this.dispose();
                 Inicio inicio = new Inicio();
                 inicio.setVisible(true);
-                try {
-                    PersistenciaTrabajadoresClientes();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } //Guarda en persitencia
-                guardarClientes(); // Agrega a el txt de datos de los clientes
                 JOptionPane.showMessageDialog(inicio, "Registro del cliente exitoso");
             }
             
@@ -194,52 +182,5 @@ public class Registro extends JFrame {
                 new Registro().setVisible(true);
             }
         });
-    }
-
-
-    public static void PersistenciaTrabajadoresClientes() throws IOException{
-        String nombreArchivo= "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Trabajadores=Galeria.getListadoTrabajadores();
-        HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
-            writer.write("=== Registro Trabajadores ===\n");
-            
-            for (java.util.Map.Entry<String, Object> entry: Trabajadores.entrySet()){
-     
-                String user= entry.getKey();
-                String password = (String) entry.getValue();
-                writer.write(user + ": ");
-                writer.write(password);
-                writer.write("\n");
-            }
-            writer.write("=== Registro Usuarios ===\n");
-            for (java.util.Map.Entry<String, Object> entry: Usuarios.entrySet()){
-            	
-            	System.out.println(entry);
-            	
-            	String user= entry.getKey();
-                String password = (String) entry.getValue();
-                writer.write(user + ": ");
-                writer.write(password);
-                writer.write("\n");
-            }
-        }
-    }
-
-     public static void guardarClientes() {
-        String archivo= "ArchivosPersistencia/ListaClientes.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
-            writer.write("Contacto/Dinero/Validacion/User/password");
-            ArrayList<Cliente> listaclientes=Galeria.getlistaClientes();
-            for (Cliente cliente : listaclientes) {
-                writer.write(cliente.getContacto() + "," + cliente.getDinero() + "," + cliente.getValidacion()+","
-                + cliente.getuser()+","+cliente.getPassword());
-                writer.write("\n");
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
