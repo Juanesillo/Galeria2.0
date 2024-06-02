@@ -1,3 +1,2 @@
-=== Registro Trabajadores ===
-Admin: 12345
 === Registro Usuarios ===
+negativo: 123456

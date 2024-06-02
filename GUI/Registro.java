@@ -10,6 +10,10 @@ import LoginRegistro.userregister;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class Registro extends JFrame {
     public Registro() {
@@ -143,6 +147,11 @@ public class Registro extends JFrame {
                Cliente cliente= new Cliente(usuario, false, contact, contrasenia, money);
                Galeria.agregarCliente(cliente);
               userregister.RegistrarUsuario(usuario, contrasenia);
+              try {
+                PersistenciaTrabajadoresClientes();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
                 //volver al panel de LOGIN
                 Registro.this.dispose();
@@ -178,11 +187,22 @@ public class Registro extends JFrame {
         Registro.this.add(logframe, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Registro().setVisible(true);
+      public static void PersistenciaTrabajadoresClientes() throws IOException{
+        String nombreArchivo= "ArchivosPersistencia/Registros.txt";
+        HashMap<String,Object> Usuarios=userregister.getlistadoUser();
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            writer.write("=== Registro Usuarios ===\n");
+            for (java.util.Map.Entry<String, Object> entry: Usuarios.entrySet()){
+            	
+            	System.out.println(entry);
+            	
+            	String user= entry.getKey();
+                String password = (String) entry.getValue();
+                writer.write(user + ": ");
+                writer.write(password);
+                writer.write("\n");
             }
-        });
+        }
     }
 }

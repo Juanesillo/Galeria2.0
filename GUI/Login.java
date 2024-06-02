@@ -122,8 +122,6 @@ public class Login extends JFrame {
                 HashMap<String,Object> trabajadores=LoginRegistro.userregister.getListadoTrabajadores();
 
 
-                System.out.println(User);
-                System.out.println(trabajadores);
 
                 // Aquí puedes agregar la lógica para el login
                 String username = user.getText();

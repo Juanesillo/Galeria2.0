@@ -10,6 +10,9 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -49,10 +52,16 @@ public class Inicio extends JFrame {
     
     userregister.setListadoTrabajadores(listadoTrabajadores);
 
+    // persistencia usuarios 
+    //leer archivo de usuarios 
 
-
-
-     
+    try {
+        HashMap<String, Object> users= leerTrabajadoresClientes();
+        userregister.setListadoUsuario(users);
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
 
 
 
@@ -152,7 +161,30 @@ public class Inicio extends JFrame {
     }
 
 
-    // cargar datos galeria
+    // cargar datos de usuarios 
+
+
+    public static HashMap<String, Object> leerTrabajadoresClientes() throws IOException {
+    String nombreArchivo = "ArchivosPersistencia/Registros.txt";
+    HashMap<String, Object> usuarios = new HashMap<>();
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+        String line;
+        // Saltar la primera línea del archivo (título)
+        reader.readLine();
+        
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(": ");
+            if (parts.length == 2) {
+                String user = parts[0];
+                String password = parts[1];
+                usuarios.put(user, password);
+            }
+        }
+    }
+
+    return usuarios;
+}
 
 
 }
