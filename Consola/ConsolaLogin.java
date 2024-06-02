@@ -162,7 +162,7 @@ public static void main(String[] args) throws Exception {
         }
         else if(input.equals(2)){
 
-            //agregar piezas al inventario de solicitud pieza
+            //agregar piezasal inventario de solicitud pi eza
             for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
                         String key = entry.getKey();
                         Pieza value = entry.getValue();

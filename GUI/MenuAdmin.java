@@ -5,9 +5,12 @@ import javax.swing.border.EmptyBorder;
 
 import Clientes.Cliente;
 import Galeria.Galeria;
+import InventariosySubasta.Inventario;
+import InventariosySubasta.Pieza;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MenuAdmin extends JFrame {
     private JPanel panelDerecho;
@@ -90,6 +93,8 @@ public class MenuAdmin extends JFrame {
         cl.show(panelDerecho, nombrePanel);
     }
 
+
+    // validar User
     private JPanel crearPanelValidarUsuario() {
     ArrayList<Cliente>   listaClientes= Galeria.getlistaClientes();
     JPanel panel = new JPanel();
@@ -120,26 +125,153 @@ public class MenuAdmin extends JFrame {
     return panel;
     }
 
+
+
+
+    // agergar pieza 
+
     private JPanel crearPanelAgregarPiezas() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Agregar Piezas a Inventario"));
-        // Agregar los componentes necesarios para agregar piezas a inventario
-        return panel;
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
+    // Lista de piezas
+    DefaultListModel<String> modeloLista = new DefaultListModel<>();
+    JList<String> listaPiezas = new JList<>(modeloLista);
+    JScrollPane scrollPane = new JScrollPane(listaPiezas);
+
+    // Iterar sobre el HashMap y agregar las piezas a la lista
+    for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
+        String key = entry.getKey();
+        Pieza value = entry.getValue();
+        modeloLista.addElement(key + " - " + value.getTitulo()); 
     }
 
-    private JPanel crearPanelEliminarInventario() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Eliminar Inventario"));
-        // Agregar los componentes necesarios para eliminar inventario
-        return panel;
+    panel.add(scrollPane, BorderLayout.CENTER);
+
+    // Botón para agregar piezas al inventario
+    JButton agregarPiezasButton = new JButton("Agregar Piezas al Inventario");
+    agregarPiezasButton.addActionListener(e -> {
+        // Iterar sobre el HashMap y agregar las piezas al inventario
+        for (Map.Entry<String, Pieza> entry : Galeria.getsolicituPiez().entrySet()) {
+            Pieza pieza = entry.getValue();
+            try {
+                Galeria.agregarPieza(pieza);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            System.out.println(pieza.getTitulo() + " agregada exitosamente al inventario.");
+        }
+        JOptionPane.showMessageDialog(MenuAdmin.this, "Todas las piezas han sido agregadas al inventario.");
+    });
+    panel.add(agregarPiezasButton, BorderLayout.SOUTH);
+
+    return panel;
     }
+
+
+
+
+
+
+// eliminar del inventario
+
+
+    private JPanel crearPanelEliminarInventario() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
+
+    // Campo de texto para ingresar el nombre de la pieza a eliminar
+    JTextField nombrePiezaTextField = new JTextField(20);
+    JPanel panelCampoTexto = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    panelCampoTexto.add(new JLabel("Nombre de la pieza a eliminar: "));
+    panelCampoTexto.add(nombrePiezaTextField);
+
+    // Espacio en blanco para separar el label del campo de texto
+    JPanel panelEspacioBlanco = new JPanel();
+    panelEspacioBlanco.setPreferredSize(new Dimension(10, 20)); // Ajusta la altura según sea necesario
+
+    panel.add(panelEspacioBlanco, BorderLayout.NORTH); // Agregar espacio en blanco arriba
+    panel.add(panelCampoTexto, BorderLayout.CENTER); // Agregar el campo de texto al centro del panel
+
+    // Botón para eliminar la pieza del inventario
+    JButton eliminarPiezaButton = new JButton("Eliminar");
+    eliminarPiezaButton.addActionListener(e -> {
+        String nombrePieza = nombrePiezaTextField.getText();
+        if (Inventario.getListadoInventario().containsKey(nombrePieza)){
+
+            Galeria.eliminarPieza(nombrePieza);
+            JOptionPane.showMessageDialog(MenuAdmin.this, "Pieza " + nombrePieza + " eliminada del inventario.");
+        }
+        else{
+            JOptionPane.showMessageDialog(MenuAdmin.this,"La pieza no se encuentra en el inventario ");
+        }
+    
+        
+        nombrePiezaTextField.setText(""); // Limpiar el campo de texto después de la eliminación
+    });
+    JPanel panelBotonEliminar = new JPanel();
+
+    
+
+    panelBotonEliminar.add(eliminarPiezaButton);
+
+    panel.add(panelBotonEliminar, BorderLayout.SOUTH); // Agregar el botón en la parte inferior
+
+    return panel;
+    }
+
+
+// Consultar Historial de la Pieza 
 
     private JPanel crearPanelConsultarHistorialPieza() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Consultar Historial Pieza"));
-        // Agregar los componentes necesarios para consultar historial de pieza
+        panel.setLayout(new BorderLayout());
+    
+        // Panel para ingresar el nombre de la pieza
+        JTextField nombrePiezaTextField = new JTextField(20);
+        JPanel panelNombrePieza = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelNombrePieza.add(new JLabel("Nombre de la pieza: "));
+        panelNombrePieza.add(nombrePiezaTextField);
+    
+        // Panel para el botón de consulta
+        JButton consultarHistorialButton = new JButton("Consultar Historial");
+        JPanel panelBoton = new JPanel();
+        panelBoton.add(consultarHistorialButton);
+    
+        // Panel para mostrar el historial
+        JTextArea historialTextArea = new JTextArea(10, 30);
+        historialTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(historialTextArea);
+    
+        // Acción al presionar el botón de consulta
+        consultarHistorialButton.addActionListener(e -> {
+            String nombrePieza = nombrePiezaTextField.getText();
+            
+            ArrayList<Object> historial = Galeria.historialPieza(nombrePieza);
+            if (historial != null && !historial.isEmpty()) {
+                historialTextArea.setText(""); // Limpiar el área de texto
+                for (Object item : historial) {
+                    historialTextArea.append(item.toString() + "\n");
+                }
+            } else {
+                historialTextArea.setText("La pieza no tiene historial registrado.");
+            }
+        });
+    
+        // Panel para organizar los componentes
+        JPanel panelConsulta = new JPanel();
+        panelConsulta.setLayout(new BorderLayout());
+        panelConsulta.add(panelNombrePieza, BorderLayout.NORTH);
+        panelConsulta.add(panelBoton, BorderLayout.CENTER);
+        panelConsulta.add(scrollPane, BorderLayout.SOUTH);
+    
+        panel.add(panelConsulta, BorderLayout.CENTER);
+    
         return panel;
     }
+
+
+
+    
 
     private JPanel crearPanelConsultarHistorialArtista() {
         JPanel panel = new JPanel();

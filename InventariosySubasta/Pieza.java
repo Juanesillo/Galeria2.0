@@ -1,6 +1,8 @@
 package InventariosySubasta;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Pieza {
@@ -23,7 +25,7 @@ public class Pieza {
 
     private static HashMap<String,Object>Especificos= new HashMap<String,Object>();
 
-    private static HashMap<String,Object>Historial= new HashMap<String,Object>();
+    private static HashMap<String,ArrayList<Object>>Historial= new HashMap<String,ArrayList<Object>>();
     // Object es un Array
         // Pieza, dueño, por cuanto ha sido vendida y cuando
 
@@ -81,7 +83,7 @@ public class Pieza {
         return autor;
     }
     
-    public static HashMap<String, Object> getHistorialPiezas(){
+    public static HashMap<String, ArrayList<Object>> getHistorialPiezas(){
     	return Historial;}
     
 
@@ -92,12 +94,12 @@ public class Pieza {
     public static void AgregarEspecificos(String key, Object value){
     	Especificos.put(key, value);}
     
-    public static void AgregarHistorial(String key, Object value){
+    public static void AgregarHistorial(String key, ArrayList<Object> value){
     	Historial.put(key, value);}
     
   
-    public static Object getHistorialPieza(String nombre){
-        return getHistorialPiezas().get(nombre);
+    public static ArrayList<Object> getHistorialPieza(String nombre){
+        return  getHistorialPiezas().get(nombre);
     }
 
 

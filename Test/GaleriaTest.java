@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import Clientes.Cliente;
 import Galeria.Galeria;
 import InventariosySubasta.Pieza;
+import LoginRegistro.userregister;
 
 public class GaleriaTest {
 
@@ -22,11 +23,11 @@ public class GaleriaTest {
     @Test
     public void testRegistrarTrabajador() {
         
-        Galeria.RegistrarTrabajador("Jack Slay", "9845632");
+        userregister.RegistrarTrabajador("Jack Slay", "9845632");
 
         // Verificar que el trabajador se haya registrado correctamente
-        assertTrue(Galeria.getListadoTrabajadores().containsKey("Jack Slay"));
-        assertEquals("9845632", Galeria.getListadoTrabajadores().get("Jack Slay"));
+        assertTrue(userregister.getListadoTrabajadores().containsKey("Jack Slay"));
+        assertEquals("9845632", userregister.getListadoTrabajadores().get("Jack Slay"));
     }
 
     @Test

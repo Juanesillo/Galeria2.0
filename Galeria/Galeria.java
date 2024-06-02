@@ -62,12 +62,12 @@ public class Galeria {
         return Inventario.getArtista(nombre);
     }
 	
-	public static HashMap<String, Object> historialPiezas() {
+	public static HashMap<String, ArrayList<Object>> historialPiezas() {
 		
 		return Pieza.getHistorialPiezas();
 	}
 
-	public static Object historialPieza(String nombre){
+	public static ArrayList<Object> historialPieza(String nombre){
         return Pieza.getHistorialPieza(nombre);
     }
 	
