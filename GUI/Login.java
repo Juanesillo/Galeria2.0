@@ -2,9 +2,13 @@ package GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Galeria.Galeria;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class Login extends JFrame {
     public Login() {
@@ -116,15 +120,63 @@ public class Login extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                HashMap<String,Object>User = Galeria.listadoUsuarios();
+                HashMap<String,Object> trabajadores=Galeria.getListadoTrabajadores();
                 // Aquí puedes agregar la lógica para el login
                 String username = user.getText();
-                String passwordText = new String(password.getPassword());
+                String passwordText = String.valueOf(password.getPassword());
 
                 // Simulación de autenticación (puedes reemplazar esto con tu lógica)
-                if (username.equals("admin") && passwordText.equals("admin")) {
-                    JOptionPane.showMessageDialog(Login.this, "Login exitoso");
-                    // Después de login exitoso, puedes abrir otra ventana o panel
-                } else {
+                if (trabajadores.containsKey(username) && trabajadores.get(username).equals(passwordText)) {
+                    JOptionPane.showMessageDialog(Login.this, "Bienvenido Señor administrador");
+                    // validaciones para los trabajadores 
+                    //interfaz administrador
+                    if (user.equals("Admin")){
+                        Login.this.dispose();
+                       MenuAdmin menuAdmin= new MenuAdmin();
+                        menuAdmin.setVisible(true);
+                        JOptionPane.showMessageDialog(menuAdmin, "Bienvenido Administrador");
+
+                    
+
+                    }
+                    //interfaz Cajero
+                    else if (user.equals("Cajero")){
+                        Login.this.dispose();
+                        menuCajero MenuCajero= new menuCajero();
+                        MenuCajero.setVisible(true);
+                        JOptionPane.showMessageDialog(MenuCajero, "Bienvenido Cajero");
+
+                    }
+                    //interfaz Operador
+                    else if (user.equals("Operador")){
+                        Login.this.dispose();
+                        MenuOperador menuOperador= new MenuOperador();
+                        menuOperador.setVisible(true);
+                        JOptionPane.showMessageDialog(menuOperador, "Bienvenido Operador");
+
+                    }
+
+                } 
+
+
+                else if (User.containsKey(username) && User.get(username).equals(passwordText)){
+                    Login.this.dispose();
+                    MenuUser menuUser= new MenuUser();
+                    menuUser.setVisible(true);
+                    JOptionPane.showMessageDialog(menuUser, "Bienvenido "+ username);
+
+
+
+                }
+                
+                
+                
+                
+                
+                
+                else {
                     JOptionPane.showMessageDialog(Login.this, "Usuario o contraseña incorrectos");
                 }
             }

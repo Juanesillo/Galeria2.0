@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame11 extends JPanel {
-    public Frame11(MainApp mainApp) {
+public class menuCajero extends JPanel {
+    public menuCajero() {
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel("Detalle de la Pieza", SwingConstants.CENTER);
@@ -14,11 +14,11 @@ public class Frame11 extends JPanel {
         add(pieceDetailLabel, BorderLayout.CENTER);
 
         JButton buyButton = new JButton("Comprar");
-        buyButton.addActionListener(e -> mainApp.showFrame("Frame9")); // Podría ir a una pantalla de confirmación de compra
+       
         add(buyButton, BorderLayout.SOUTH);
 
         JButton artistDetailButton = new JButton("Ver detalles del artista");
-        artistDetailButton.addActionListener(e -> mainApp.showFrame("Frame12"));
+
         add(artistDetailButton, BorderLayout.SOUTH);
     }
 }

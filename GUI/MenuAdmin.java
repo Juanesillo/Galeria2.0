@@ -3,8 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame9 extends JPanel {
-    public Frame9(MainApp mainApp) {
+public class MenuAdmin extends JPanel {
+    public MenuAdmin() {
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel("Detalle de la Pieza", SwingConstants.CENTER);
@@ -14,7 +14,7 @@ public class Frame9 extends JPanel {
         add(detailLabel, BorderLayout.CENTER);
 
         JButton buyButton = new JButton("Comprar");
-        buyButton.addActionListener(e -> mainApp.showFrame("Frame10"));
+
         add(buyButton, BorderLayout.SOUTH);
     }
 }
