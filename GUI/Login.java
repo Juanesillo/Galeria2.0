@@ -122,7 +122,12 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 HashMap<String,Object>User = Galeria.listadoUsuarios();
-                HashMap<String,Object> trabajadores=Galeria.getListadoTrabajadores();
+                HashMap<String,Object> trabajadores=LoginRegistro.Login.getlistadoUser();
+
+
+                System.out.println(User);
+                System.out.println(trabajadores);
+
                 // Aquí puedes agregar la lógica para el login
                 String username = user.getText();
                 String passwordText = String.valueOf(password.getPassword());
@@ -192,4 +197,6 @@ public class Login extends JFrame {
             }
         });
     }
+
+
 }

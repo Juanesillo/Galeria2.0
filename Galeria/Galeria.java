@@ -12,7 +12,6 @@ public class Galeria {
 
     // lista clientes
     // HistorialPieza
-    private static HashMap<String,Object>ListadoTrabajadores=new HashMap<String,Object>();
     private static ArrayList<Cliente>ListaClientes = new ArrayList<Cliente>();
     private static HashMap<String,Pieza>SolicitudPieza= new HashMap<String,Pieza>();
     private static ArrayList<String>SolicitudCompra= new ArrayList<String>();  
@@ -31,20 +30,11 @@ public class Galeria {
         return ListaClientes;
     }
 
-    public static HashMap<String, Object> getListadoTrabajadores() {
-		
-		return ListadoTrabajadores;
-	}
-  
+
    
 
-    public static void RegistrarTrabajador(String user, Object password){
-        ListadoTrabajadores.put(user, password);
-    }
 
-    public static void setListadoTrabajadores(HashMap<String, Object> listadoTrabajadores) {
-        ListadoTrabajadores = listadoTrabajadores;
-    }
+  
 
     public static void agregarCliente(Cliente cliente){
         ListaClientes.add(cliente);

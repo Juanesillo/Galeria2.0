@@ -138,4 +138,9 @@ public class Inicio extends JFrame {
 
 
     }
+
+
+    // cargar datos galeria
+
+    
 }
