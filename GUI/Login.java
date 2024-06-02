@@ -1,25 +1,143 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JPanel{
+public class Login extends JFrame {
+    public Login() {
+        super("Login Galeria");
 
-	public Login() {
-        setLayout(new GridLayout(3, 2));
+        // Establecer el tamaño de la ventana
+        this.setSize(600, 600);
 
-        JLabel userLabel = new JLabel("Usuario:");
-        JTextField userField = new JTextField();
-        JLabel passLabel = new JLabel("Contraseña:");
-        JPasswordField passField = new JPasswordField();
-        JButton loginButton = new JButton("Login");
+        // Terminar el programa cuando la GUI se cierre
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-       
+        // Ejecutar la GUI en la mitad de la pantalla
+        this.setLocationRelativeTo(null);
 
-        add(userLabel);
-        add(userField);
-        add(passLabel);
-        add(passField);
-        add(loginButton);
+        // Llamar al método para inicializar y agregar componentes
+        iniciar();
+    }
+
+    private void iniciar() {
+        // Agregar el título en la parte superior
+        JPanel titulo = new JPanel();
+        JLabel ltitulo = new JLabel("Login Pinacoteca", JLabel.CENTER);
+        ltitulo.setFont(new Font("Arial", Font.BOLD, 22));
+        titulo.add(ltitulo);
+        Login.this.add(titulo, BorderLayout.NORTH);
+
+        // Agregar el pie en la parte inferior
+        JPanel pie = new JPanel(new GridLayout(1, 2, 30, 5));
+        pie.setBorder(new EmptyBorder(0, 30, 0, 30));
+        JLabel Copyright = new JLabel("DPOO2024");
+        Copyright.setFont(new Font("Arial", Font.BOLD, 15));
+        pie.add(Copyright);
+        Login.this.add(pie, BorderLayout.SOUTH);
+
+        // Agregar un panel en el centro con GridBagLayout
+        JPanel logframe = new JPanel(new GridBagLayout());
+        GridBagConstraints rules = new GridBagConstraints();
+        logframe.setBorder(new EmptyBorder(5, 10, 5, 10));
+
+        // Fuente más grande para los textos
+        Font labelFont = new Font("Arial", Font.BOLD, 16);
+        Font textFieldFont = new Font("Arial", Font.PLAIN, 16);
+
+        // Etiqueta y campo de texto para el usuario
+        JLabel tituloUser = new JLabel("User:");
+        tituloUser.setFont(labelFont);
+        rules.gridx = 0;
+        rules.gridy = 0;
+        rules.gridwidth = 1;
+        rules.anchor = GridBagConstraints.WEST;
+        logframe.add(tituloUser, rules);
+
+        JTextField user = new JTextField(10);
+        user.setFont(textFieldFont);
+        rules.gridx = 1;
+        rules.gridy = 0;
+        rules.gridwidth = 2;
+        rules.fill = GridBagConstraints.HORIZONTAL;
+        logframe.add(user, rules);
+
+        // Etiqueta y campo de texto para la contraseña
+        JLabel tituloPass = new JLabel("Password:");
+        tituloPass.setFont(labelFont);
+        rules.gridx = 0;
+        rules.gridy = 1;
+        rules.gridwidth = 1;
+        rules.fill = GridBagConstraints.NONE;
+        logframe.add(tituloPass, rules);
+
+        JPasswordField password = new JPasswordField(10);
+        password.setFont(textFieldFont);
+        rules.gridx = 1;
+        rules.gridy = 1;
+        rules.gridwidth = 2;
+        rules.fill = GridBagConstraints.HORIZONTAL;
+        logframe.add(password, rules);
+
+        // Botón de login
+        JButton loginButton = new JButton("LOGIN");
+        loginButton.setFont(new Font("Arial", Font.BOLD, 16));
+        rules.gridx = 1;
+        rules.gridy = 2;
+        rules.gridwidth = 2;
+        rules.fill = GridBagConstraints.NONE;
+        rules.anchor = GridBagConstraints.CENTER;
+        logframe.add(loginButton, rules);
+
+        // Botón de regresar
+        JButton regresar = new JButton("REGRESAR");
+        regresar.setFont(new Font("Arial", Font.BOLD, 16));
+        rules.gridx = 1;
+        rules.gridy = 3;
+        rules.gridwidth = 2;
+        rules.fill = GridBagConstraints.NONE;
+        rules.anchor = GridBagConstraints.CENTER;
+        Login.this.add(regresar, BorderLayout.SOUTH);
+
+        // Acción para el botón de regresar
+        regresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login.this.dispose();
+                Inicio inicio = new Inicio();
+                inicio.setVisible(true);
+            }
+        });
+
+        // Acción para el botón de login (puedes personalizar esto según tus necesidades)
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Aquí puedes agregar la lógica para el login
+                String username = user.getText();
+                String passwordText = new String(password.getPassword());
+
+                // Simulación de autenticación (puedes reemplazar esto con tu lógica)
+                if (username.equals("admin") && passwordText.equals("admin")) {
+                    JOptionPane.showMessageDialog(Login.this, "Login exitoso");
+                    // Después de login exitoso, puedes abrir otra ventana o panel
+                } else {
+                    JOptionPane.showMessageDialog(Login.this, "Usuario o contraseña incorrectos");
+                }
+            }
+        });
+
+        Login.this.add(logframe, BorderLayout.CENTER);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Login().setVisible(true);
+            }
+        });
     }
 }
