@@ -1,5 +1,6 @@
 package Trabajadores;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import Clientes.Cliente;
@@ -10,6 +11,8 @@ public class Cajero extends userregister {
     
 
     private static HashMap<String, Integer>registroCompras = new HashMap<String, Integer>();
+    private static HashMap<LocalDate, Integer> ventas= new HashMap<LocalDate,Integer>();
+
 
     public Cajero(String user, Object password){
         super(user, password);
@@ -22,6 +25,7 @@ public class Cajero extends userregister {
 
     public static void RegistrarCompra(String nombrePieza, Integer Costo){
         registroCompras.put(nombrePieza, Costo);
+        ventas.put(LocalDate.now(),Costo);
     }
 
     // validar que se puede realizar la compra
@@ -36,6 +40,11 @@ public class Cajero extends userregister {
 
        return retorno;
 
+    }
+
+
+    public static HashMap<LocalDate, Integer> getVentas() {
+        return ventas;
     }
 
 

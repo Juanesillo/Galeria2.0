@@ -7,9 +7,12 @@ import Clientes.Cliente;
 import Galeria.Galeria;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
+import Trabajadores.Cajero;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MenuAdmin extends JFrame {
@@ -345,14 +348,51 @@ public class MenuAdmin extends JFrame {
 
     // requerimiento agregado
     private JPanel crearPanelCalendarioVentas() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Calendario de Ventas"));
-        // Agregar los componentes necesarios para el calendario de ventas
-        return panel;
+        JPanel panel = new JPanel(new GridLayout(0, 7, 2, 2));
+
+    // Obtener el registro de ventas (reemplázalo con tu propio HashMap)
+    HashMap<LocalDate, Integer> ventas = Cajero.getVentas();
+
+    // Obtener la fecha actual
+    LocalDate fechaActual = LocalDate.now();
+
+    // Obtener el primer día del año actual
+    LocalDate primerDiaAnio = LocalDate.of(fechaActual.getYear(), 1, 1);
+
+    // Obtener el último día del año actual
+    LocalDate ultimoDiaAnio = LocalDate.of(fechaActual.getYear(), 12, 31);
+
+    // Calcular el número de días del año actual
+    int diasAnio = ultimoDiaAnio.getDayOfYear();
+
+    // Crear la matriz de etiquetas para representar el calendario de ventas
+    JLabel[][] matrizCalendario = new JLabel[6][7];
+
+    // Inicializar la matriz con etiquetas vacías
+    for (int fila = 0; fila < 6; fila++) {
+        for (int columna = 0; columna < 7; columna++) {
+            matrizCalendario[fila][columna] = new JLabel("", SwingConstants.CENTER);
+            panel.add(matrizCalendario[fila][columna]);
+        }
     }
+
+    // Llenar la matriz con las ventas realizadas en cada día del año
+    int dia = 1;
+for (LocalDate fecha = primerDiaAnio; fecha.isBefore(ultimoDiaAnio.plusDays(1)); fecha = fecha.plusDays(1)) {
+    Integer ventaDia = ventas.getOrDefault(fecha, 0);
+    int fila = (dia - 1) / 7;
+    int columna = (dia - 1) % 7;
+    if (fila < 6 && columna < 7) {
+        matrizCalendario[fila][columna].setText(String.valueOf(ventaDia));
+    }
+    dia++;
+}
+
+    return panel;
+    }
+    
 
     public static void main(String[] args) {
         MenuAdmin admin = new MenuAdmin();
         admin.setVisible(true);
-    }
-}
+    }}
