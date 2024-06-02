@@ -15,9 +15,8 @@ public class MainApp {
             // Esta linea de codigo ejecuta LoginGui para que aparezca en pantalla
             @Override
             public void run(){
-            //  new  Login().setVisible(true);
+            new  Inicio().setVisible(true);
 
-            new Login().setVisible(true);
 
 
                

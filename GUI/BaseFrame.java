@@ -46,7 +46,7 @@ public abstract class BaseFrame extends JFrame{
 
         // llamar la subclase addguicomponent
 
-        addguicomponent();
+        
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -60,7 +60,6 @@ public abstract class BaseFrame extends JFrame{
 
     // addguicomponent es un metodo abstracto que puede ser modificado dependiendo del caso en la aplicacíón 
 
-    protected abstract void addguicomponent();
 
 
 
