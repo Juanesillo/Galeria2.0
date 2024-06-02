@@ -93,6 +93,43 @@ public class menuCajero extends JFrame {
         panelNombreYPrecio.add(new JLabel("Precio: "));
         panelNombreYPrecio.add(precioTextField);
     
+        // Panel para seleccionar el método de pago
+        String[] metodosPago = {"Tarjeta Normal", "Efectivo", "Tarjeta de Crédito"};
+        JComboBox<String> metodoPagoComboBox = new JComboBox<>(metodosPago);
+        JPanel panelMetodoPago = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelMetodoPago.add(new JLabel("Método de Pago: "));
+        panelMetodoPago.add(metodoPagoComboBox);
+    
+        // Paneles para campos adicionales según el método de pago
+        JPanel panelCamposAdicionales = new JPanel(new CardLayout());
+        JPanel panelTarjetaNormal = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelTarjetaNormal.add(new JLabel("Número de Tarjeta: "));
+        JTextField numeroTarjetaNormalTextField = new JTextField(20);
+        panelTarjetaNormal.add(numeroTarjetaNormalTextField);
+    
+        JPanel panelEfectivo = new JPanel(); // No se requieren campos adicionales para efectivo
+    
+        JPanel panelTarjetaCredito = new JPanel(new GridLayout(3, 2, 5, 5));
+        panelTarjetaCredito.add(new JLabel("Número de Tarjeta: "));
+        JTextField numeroTarjetaCreditoTextField = new JTextField(20);
+        panelTarjetaCredito.add(numeroTarjetaCreditoTextField);
+        panelTarjetaCredito.add(new JLabel("Fecha de Expiración: "));
+        JTextField fechaExpiracionTextField = new JTextField(10);
+        panelTarjetaCredito.add(fechaExpiracionTextField);
+        panelTarjetaCredito.add(new JLabel("CVV: "));
+        JTextField cvvTextField = new JTextField(5);
+        panelTarjetaCredito.add(cvvTextField);
+    
+        panelCamposAdicionales.add(panelTarjetaNormal, "Tarjeta Normal");
+        panelCamposAdicionales.add(panelEfectivo, "Efectivo");
+        panelCamposAdicionales.add(panelTarjetaCredito, "Tarjeta de Crédito");
+    
+        // Cambiar paneles adicionales según el método de pago seleccionado
+        metodoPagoComboBox.addActionListener(e -> {
+            CardLayout cl = (CardLayout) (panelCamposAdicionales.getLayout());
+            cl.show(panelCamposAdicionales, (String) metodoPagoComboBox.getSelectedItem());
+        });
+    
         // Panel para el botón de registro de pago
         JButton registrarPagoButton = new JButton("Registrar Pago");
         JPanel panelBoton = new JPanel();
@@ -102,28 +139,46 @@ public class menuCajero extends JFrame {
         registrarPagoButton.addActionListener(e -> {
             String nombrePieza = nombrePiezaTextField.getText();
             Integer precio = Integer.parseInt(precioTextField.getText());
-           
-
-            
-                if(Galeria.listadoInventario().containsKey(nombrePieza)){
-                    Cajero.RegistrarCompra(nombrePieza, precio);
-                    JOptionPane.showMessageDialog(menuCajero.this, "Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio);
+            String metodoPago = (String) metodoPagoComboBox.getSelectedItem();
+    
+            if (Galeria.listadoInventario().containsKey(nombrePieza)) {
+                if (metodoPago.equals("Tarjeta Normal")) {
+                    String numeroTarjeta = numeroTarjetaNormalTextField.getText();
+                    // Implementar la lógica de pago con tarjeta normal
+                    System.out.println("Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio + ", Método de Pago: Tarjeta Normal, Número de Tarjeta: " + numeroTarjeta);
+                } else if (metodoPago.equals("Efectivo")) {
+                    // Implementar la lógica de pago en efectivo
+                    System.out.println("Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio + ", Método de Pago: Efectivo");
+                } else if (metodoPago.equals("Tarjeta de Crédito")) {
+                    String numeroTarjeta = numeroTarjetaCreditoTextField.getText();
+                    String fechaExpiracion = fechaExpiracionTextField.getText();
+                    String cvv = cvvTextField.getText();
+                    // Implementar la lógica de pago con tarjeta de crédito
+                    System.out.println("Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio + ", Método de Pago: Tarjeta de Crédito, Número de Tarjeta: " + numeroTarjeta + ", Fecha de Expiración: " + fechaExpiracion + ", CVV: " + cvv);
                 }
-                else{
-                    JOptionPane.showMessageDialog(menuCajero.this, "No se encontró la pieza");
-                    System.err.println(Galeria.listadoInventario());
-                }
-
-            
-            nombrePiezaTextField.setText(""); // Limpiar el campo de texto después del registro
-            precioTextField.setText(""); // Limpiar el campo de texto después del registro
+                Cajero.RegistrarCompra(nombrePieza, precio);
+                JOptionPane.showMessageDialog(menuCajero.this, "Pago registrado para la pieza: " + nombrePieza + ", Precio: " + precio);
+            } else {
+                JOptionPane.showMessageDialog(menuCajero.this, "No se encontró la pieza");
+                System.err.println(Galeria.listadoInventario());
+            }
+    
+            // Limpiar los campos de texto después del registro
+            nombrePiezaTextField.setText("");
+            precioTextField.setText("");
+            numeroTarjetaNormalTextField.setText("");
+            numeroTarjetaCreditoTextField.setText("");
+            fechaExpiracionTextField.setText("");
+            cvvTextField.setText("");
         });
     
         // Panel para organizar los componentes
         JPanel panelRegistroPago = new JPanel();
         panelRegistroPago.setLayout(new BorderLayout());
-        panelRegistroPago.add(panelNombreYPrecio, BorderLayout.CENTER);
-        panelRegistroPago.add(panelBoton, BorderLayout.SOUTH);
+        panelRegistroPago.add(panelNombreYPrecio, BorderLayout.NORTH);
+        panelRegistroPago.add(panelMetodoPago, BorderLayout.CENTER);
+        panelRegistroPago.add(panelCamposAdicionales, BorderLayout.SOUTH);
+        panelRegistroPago.add(panelBoton, BorderLayout.PAGE_END);
     
         panel.add(panelRegistroPago, BorderLayout.CENTER);
     
