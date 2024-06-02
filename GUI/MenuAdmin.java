@@ -274,12 +274,72 @@ public class MenuAdmin extends JFrame {
     
 
     private JPanel crearPanelConsultarHistorialArtista() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Panel de Consultar Historial Artista"));
-        // Agregar los componentes necesarios para consultar historial de artista
-        return panel;
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
+
+    // Panel para ingresar el nombre del artista
+    JTextField nombreArtistaTextField = new JTextField(20);
+    JPanel panelNombreArtista = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    panelNombreArtista.add(new JLabel("Nombre del artista: "));
+    panelNombreArtista.add(nombreArtistaTextField);
+
+    // Panel para el botón de consulta
+    JButton consultarHistorialButton = new JButton("Consultar Historial");
+    JPanel panelBoton = new JPanel();
+    panelBoton.add(consultarHistorialButton);
+
+    // Panel para mostrar el historial
+    JTextArea historialTextArea = new JTextArea(10, 30);
+    historialTextArea.setEditable(false);
+    JScrollPane scrollPane = new JScrollPane(historialTextArea);
+
+    // Acción al presionar el botón de consulta
+    consultarHistorialButton.addActionListener(e -> {
+        String nombreArtista = nombreArtistaTextField.getText();
+        //agregar al historial antes de imprimirlo 
+        Inventario.AgregarHistorialArtista(nombreArtista);
+        ArrayList<Pieza> historial = Galeria.historialArtista(nombreArtista);
+        if (historial != null && !historial.isEmpty()) {
+            historialTextArea.setText(""); // Limpiar el área de texto
+            for (Object item : historial) {
+                historialTextArea.append(item.toString() + "\n");
+            }
+        } else {
+            historialTextArea.setText("El artista no tiene historial registrado.");
+        }
+    });
+
+    // Panel para organizar los componentes
+    JPanel panelConsulta = new JPanel();
+    panelConsulta.setLayout(new BorderLayout());
+    panelConsulta.add(panelNombreArtista, BorderLayout.NORTH);
+    panelConsulta.add(panelBoton, BorderLayout.CENTER);
+    panelConsulta.add(scrollPane, BorderLayout.SOUTH);
+
+    panel.add(panelConsulta, BorderLayout.CENTER);
+
+    return panel;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // requerimiento agregado
     private JPanel crearPanelCalendarioVentas() {
         JPanel panel = new JPanel();
         panel.add(new JLabel("Panel de Calendario de Ventas"));

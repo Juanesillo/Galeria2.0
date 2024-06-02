@@ -96,7 +96,7 @@ public class Pieza {
     
     public static void AgregarHistorial(String key, ArrayList<Object> value){
     	Historial.put(key, value);}
-    
+   
   
     public static ArrayList<Object> getHistorialPieza(String nombre){
         return  getHistorialPiezas().get(nombre);

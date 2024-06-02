@@ -49,6 +49,8 @@ public class Inventario {
     public static void AgregarDatos(Pieza pieza) throws Exception {
         try{
             ListadoInventario.put(pieza.getTitulo(),pieza);
+            //agregar al mapa de historial artista 
+
             if (pieza.getEstado().equals("exhibida")){exhibidas.put(pieza.getTitulo(),pieza);}// registrar en mapa de Exhibidas
             if (pieza.getDisponible()){ListadoSubasta.put(pieza.getTitulo(),pieza);} // registrar en mapa de subasta
             

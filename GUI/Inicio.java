@@ -44,6 +44,8 @@ public class Inicio extends JFrame {
 
 
     private void iniciar() {
+
+
         // agregar credenciales de trabajadores
     HashMap<String,Object>listadoTrabajadores= new HashMap<String,Object>();
     listadoTrabajadores.put("admin", "admin");
