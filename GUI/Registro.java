@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Registro extends JPanel {
-    public Registro(MainApp mainApp) {
+    public Registro() {
         setLayout(new GridLayout(5, 2));
 
         JLabel nameLabel = new JLabel("Nombre:");
@@ -17,7 +17,7 @@ public class Registro extends JPanel {
         JTextField emailField = new JTextField();
         JButton registerButton = new JButton("Registrar");
 
-        registerButton.addActionListener(e -> mainApp.showFrame("Frame1"));
+       
 
         add(nameLabel);
         add(nameField);

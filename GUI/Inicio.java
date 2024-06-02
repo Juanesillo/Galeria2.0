@@ -1,7 +1,12 @@
 package GUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Galeria.Galeria;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
     public Inicio() {
@@ -19,6 +24,9 @@ public class Inicio extends JFrame {
         // Llamar al método para inicializar y agregar componentes
         iniciar();
     }
+
+
+    public static Galeria galeria= new Galeria();
 
     private void iniciar() {
         // Agregar el título en la parte superior
@@ -63,6 +71,21 @@ public class Inicio extends JFrame {
         rules.weightx=0.0;
         rules.weighty=1.0;
         rules.fill = GridBagConstraints.HORIZONTAL;
+
+        //funcionalidad de los botones
+
+        login.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Inicio.this.dispose();
+               Login login = new Login();
+               login.setVisible(true);
+               JOptionPane.showMessageDialog(login, "Ingrese sus credenciales");
+            }
+            
+        });
+
         logframe.add(login, rules);
 
         // Agregar el panel al centro del JFrame
@@ -76,7 +99,21 @@ public class Inicio extends JFrame {
         rules.gridwidth = 1;
         rules.fill = GridBagConstraints.HORIZONTAL;
         logframe.add(registro, rules);
+        // ajustes Boton de registro 
 
+
+        registro.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inicio.this.dispose();
+                Registro registro= new Registro();
+                registro.setVisible(true);
+                JOptionPane.showMessageDialog(login, "Valide su informació");
+
+            }
+            
+        });
 
 
         Inicio.this.add(logframe, BorderLayout.CENTER);
