@@ -1,4 +1,5 @@
 === Registro Usuarios ===
+Juan Carlos Rojas: 123
 negativo: 123456
 prueba: 12344
 n: 123456
