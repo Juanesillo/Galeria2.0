@@ -30,12 +30,6 @@ public class Galeria {
         return ListaClientes;
     }
 
-
-   
-
-
-  
-
     public static void agregarCliente(Cliente cliente){
         ListaClientes.add(cliente);
     }
@@ -53,6 +47,7 @@ public class Galeria {
     public static HashMap<String,Pieza> getsolicituPiez(){ 
     	return SolicitudPieza;}
     
+    // Historial artista
 	public static HashMap<String, ArrayList<Pieza>> historialArtistas() {
 		
 		return Inventario.getHistorialArtistas();
@@ -62,6 +57,8 @@ public class Galeria {
         return Inventario.getArtista(nombre);
     }
 	
+	//Historial Pieza
+	
 	public static HashMap<String, ArrayList<Object>> historialPiezas() {
 		
 		return Pieza.getHistorialPiezas();
@@ -70,6 +67,8 @@ public class Galeria {
 	public static ArrayList<Object> historialPieza(String nombre){
         return Pieza.getHistorialPieza(nombre);
     }
+	
+	// Inventario y pieza
 	
 	public static HashMap<String, Pieza> listadoInventario() {
 		
@@ -84,6 +83,7 @@ public class Galeria {
 		Inventario.eliminarPieza(nombre);
 	}
 	
+	// Usuarios
 	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
 		userregister.setListadoUsuario(listadoUsuario);
 	}
@@ -96,6 +96,10 @@ public class Galeria {
 		userregister.RegistrarUsuario(usuario, contraseña);
 	}
 	
+	// Trabajadores
+	public static void crearListadoTrabajadores(HashMap<String, Object> listadoTrabajadores) {
+		userregister.setListadoTrabajadores(listadoTrabajadores);
+	}
 	
 
     // subastas existentes 

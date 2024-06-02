@@ -4,7 +4,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import Galeria.Galeria;
-import LoginRegistro.userregister;
+
 
 import java.awt.*;
 
@@ -52,14 +52,14 @@ public class Inicio extends JFrame {
     listadoTrabajadores.put("Cajero", "Cajero");
     listadoTrabajadores.put("Operador", "Operador");
     
-    userregister.setListadoTrabajadores(listadoTrabajadores);
+    Galeria.crearListadoTrabajadores(listadoTrabajadores);
 
     // persistencia usuarios 
     //leer archivo de usuarios 
 
     try {
         HashMap<String, Object> users= leerTrabajadoresClientes();
-        userregister.setListadoUsuario(users);
+        Galeria.crearListadoUsuarios(users);
     } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
