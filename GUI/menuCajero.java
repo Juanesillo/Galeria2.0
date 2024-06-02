@@ -65,7 +65,11 @@ public class menuCajero extends JFrame {
         cobrarSubastaBtn.addActionListener(e -> mostrarPanel("CobrarSubasta"));
         consultarHistorialPiezaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialPieza"));
         consultarHistorialArtistaBtn.addActionListener(e -> mostrarPanel("ConsultarHistorialArtista"));
-        salirBtn.addActionListener(e -> System.exit(0));
+        salirBtn.addActionListener(e -> {
+            menuCajero.this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        });
 
         // Crear el JSplitPane para dividir la ventana en dos partes
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelIzquierdo, panelDerecho);
