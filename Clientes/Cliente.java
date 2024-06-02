@@ -5,7 +5,7 @@ import java.util.HashMap;
 import InventariosySubasta.Pieza;
 import LoginRegistro.*;
 
-public class Cliente extends Login {
+public class Cliente extends userregister {
 
 
     private HashMap<String,Pieza> Compras= new HashMap<String,Pieza>();

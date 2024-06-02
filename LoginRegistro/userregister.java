@@ -3,14 +3,14 @@ import java.util.HashMap;
 
 
 
-public class Login {
+public class userregister {
 
     private String user;
     private Object password;
     private static HashMap<String,Object>ListadoUsuario=new HashMap<String,Object>();
     private static HashMap<String,Object>ListadoTrabajadores=new HashMap<String,Object>();
 
-    public Login(String user, Object password){
+    public userregister(String user, Object password){
 
         this.user=user;
         this.password=password;
@@ -63,6 +63,13 @@ public class Login {
     public static void setListadoUsuario(HashMap<String, Object> listadoUsuario) {
         ListadoUsuario = listadoUsuario;
     }
+
+    public static HashMap<String, Object> getListadoTrabajadores() {
+        return ListadoTrabajadores;
+    }
+
+
+    
 
 
     

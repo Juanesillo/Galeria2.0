@@ -4,11 +4,13 @@ import javax.swing.border.EmptyBorder;
 
 
 import Galeria.Galeria;
+import LoginRegistro.userregister;
 
 import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 
 public class Inicio extends JFrame {
@@ -39,6 +41,16 @@ public class Inicio extends JFrame {
 
 
     private void iniciar() {
+        // agregar credenciales de trabajadores
+    HashMap<String,Object>listadoTrabajadores= new HashMap<String,Object>();
+    listadoTrabajadores.put("admin", "admin");
+    listadoTrabajadores.put("Cajero", "Cajero");
+    listadoTrabajadores.put("Operador", "Operador");
+    
+    userregister.setListadoTrabajadores(listadoTrabajadores);
+
+
+
 
      
 
@@ -142,5 +154,5 @@ public class Inicio extends JFrame {
 
     // cargar datos galeria
 
-    
+
 }

@@ -15,6 +15,7 @@ import Clientes.Cliente;
 
 import InventariosySubasta.Pieza;
 import InventariosySubasta.Subasta;
+import LoginRegistro.userregister;
 import Trabajadores.Cajero;
 
 import Galeria.Galeria;
@@ -52,7 +53,7 @@ public static void main(String[] args) throws Exception {
             if (isNotEmpty) {
         		HashMap<String,Object> Trabajadores= datosPersistencia.get(0);
         		HashMap<String,Object> Usuarios= datosPersistencia.get(1);
-        		Galeria.setListadoTrabajadores(Trabajadores);
+        		userregister.setListadoTrabajadores(Trabajadores);
         		Galeria.crearListadoUsuarios(Usuarios);
         		
         		PersistenciaTrabajadoresClientes(); }
@@ -81,7 +82,7 @@ public static void main(String[] args) throws Exception {
             System.out.println("Por favor Digite su contraseña");
             String password = scanner.nextLine();
             HashMap<String,Object>User = Galeria.listadoUsuarios();
-            HashMap<String,Object> trabajadores=Galeria.getListadoTrabajadores();
+            HashMap<String,Object> trabajadores=userregister.getlistadoUser();
 
             if(User.containsKey(user) && User.get(user).equals(password)){
                 System.out.println("Bienvenido Usuario" + user+"\n");
@@ -389,10 +390,10 @@ public static void main(String[] args) throws Exception {
         }
         else if(input== 2){
             System.out.println("Por favor Digite su Usuario");
-            String user =scanner.nextLine();
+            
             System.out.println("Por favor Digite su Contraseña");
-            Object password = scanner.nextLine();
-            Galeria.RegistrarTrabajador(user, password);
+       
+            
         }
         else{
             System.out.println("\u001B[31mOpción no válida, por favor intente de nuevo\u001B[0m");
@@ -404,7 +405,7 @@ public static void main(String[] args) throws Exception {
     // persistencia Trabajadores y usuarios
     public static void PersistenciaTrabajadoresClientes() throws IOException{
         String nombreArchivo= "ArchivosPersistencia/Registros.txt";
-        HashMap<String,Object> Trabajadores=Galeria.getListadoTrabajadores();
+        HashMap<String,Object> Trabajadores=userregister.getlistadoUser();
         HashMap<String,Object> Usuarios=Galeria.listadoUsuarios();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
@@ -517,8 +518,7 @@ public static void main(String[] args) throws Exception {
                     datosPersistencia.add(Trabajadores);
                     datosPersistencia.add(Usuarios);
                     		
-                Galeria.setListadoTrabajadores(Trabajadores);
-                
+                userregister.setListadoTrabajadores(Trabajadores);
                 setDatosPersistencia(datosPersistencia);
                 
                 

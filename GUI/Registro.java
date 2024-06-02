@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 
 import Clientes.Cliente;
 import Galeria.Galeria;
-import LoginRegistro.Login;
+import LoginRegistro.userregister;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -142,7 +142,7 @@ public class Registro extends JFrame {
                double money= Double.parseDouble(dinero.getText());
                Cliente cliente= new Cliente(usuario, false, contact, contrasenia, money);
                Galeria.agregarCliente(cliente);
-               Login.RegistrarUsuario(usuario, contrasenia);
+              userregister.RegistrarUsuario(usuario, contrasenia);
 
                 //volver al panel de LOGIN
                 Registro.this.dispose();

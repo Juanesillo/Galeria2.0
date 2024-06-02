@@ -2,7 +2,7 @@ package Galeria;
 import java.util.ArrayList;
 import java.util.HashMap;
 import InventariosySubasta.Subasta;
-import LoginRegistro.Login;
+import LoginRegistro.userregister;
 import Clientes.Cliente;
 import InventariosySubasta.Inventario;
 import InventariosySubasta.Pieza;
@@ -85,15 +85,15 @@ public class Galeria {
 	}
 	
 	public static void crearListadoUsuarios(HashMap<String, Object> listadoUsuario) {
-		Login.setListadoUsuario(listadoUsuario);
+		userregister.setListadoUsuario(listadoUsuario);
 	}
 	
 	public static HashMap<String, Object> listadoUsuarios() {
-		return Login.getlistadoUser();
+		return userregister.getlistadoUser();
 	}
 	
 	public static void agregarNuevoUsuario(String usuario, Object contraseña) {
-		Login.RegistrarUsuario(usuario, contraseña);
+		userregister.RegistrarUsuario(usuario, contraseña);
 	}
 	
 	

@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import Clientes.Cliente;
 import InventariosySubasta.Pieza;
-import LoginRegistro.Login;
+import LoginRegistro.userregister;
 
-public class Cajero extends Login {
+public class Cajero extends userregister {
     
 
     private static HashMap<String, Integer>registroCompras = new HashMap<String, Integer>();

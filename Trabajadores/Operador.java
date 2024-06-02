@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 
 import InventariosySubasta.Pieza;
 import InventariosySubasta.Subasta;
-import LoginRegistro.Login;
+import LoginRegistro.userregister;
 
-public class Operador extends Login{
+public class Operador extends userregister{
 
 
     private static  HashMap<String,Pieza> Ganadores= new HashMap<String,Pieza>();

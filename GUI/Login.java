@@ -2,9 +2,6 @@ package GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import Galeria.Galeria;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,8 +118,8 @@ public class Login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                HashMap<String,Object>User = Galeria.listadoUsuarios();
-                HashMap<String,Object> trabajadores=LoginRegistro.Login.getlistadoUser();
+                HashMap<String,Object>User = LoginRegistro.userregister.getlistadoUser();
+                HashMap<String,Object> trabajadores=LoginRegistro.userregister.getListadoTrabajadores();
 
 
                 System.out.println(User);

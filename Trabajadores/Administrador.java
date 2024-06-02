@@ -8,7 +8,7 @@ import LoginRegistro.*;
 
 
 
-public class Administrador extends Login {
+public class Administrador extends userregister {
 
     //lista solicitudes Cliente
 
