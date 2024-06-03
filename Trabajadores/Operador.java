@@ -17,6 +17,10 @@ public class Operador extends userregister{
     public Operador(String user, Object password){
         super(user, password);
     }
+    
+    public static void iniciarLaSubasta() {
+    	Subasta.iniciarSubasta();
+    }
 
     public  static HashMap<String,Pieza> ObtenerGanador(){
         return Ganadores;

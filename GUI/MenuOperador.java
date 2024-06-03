@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 
 import Galeria.Galeria;
 import InventariosySubasta.Pieza;
-import InventariosySubasta.Subasta;
+
 import Trabajadores.Operador;
 
 import java.awt.*;
@@ -96,7 +96,7 @@ public class MenuOperador extends JFrame {
         
         JButton iniciarSubastaBtn = new JButton("Iniciar Subasta");
         iniciarSubastaBtn.addActionListener(e -> {
-            Subasta.iniciarSubasta();
+            Operador.iniciarLaSubasta();
             JOptionPane.showMessageDialog(MenuOperador.this, "Subasta Iniciada");
         });
 
